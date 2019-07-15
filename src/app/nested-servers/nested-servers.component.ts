@@ -6,11 +6,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './nested-servers.component.html',
   styleUrls: ['./nested-servers.component.css']
 })
-export class NestedServersComponent implements OnInit {
+export class NestedServersComponent  {
+  serverId: number = 10;
+  serverStatus: string[] = ['online', 'offline'];
 
-  constructor() { }
-
-  ngOnInit() {
+  getServerStatus() {
+    return this.serverStatus[this.serverId % 2];
   }
 
 }

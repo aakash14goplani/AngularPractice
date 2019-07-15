@@ -1,7 +1,13 @@
 <div class="row">
     <div class="col-sm-12">
-        <p>nested-servers works!</p>
-        <h5>calling parent server</h5>  
+        <p>Nested-Servers works!</p>
+        <p>Checking Parent Server status...</p>
+        <p>
+            {{ 'Parent Server' }} is currently <strong>{{ getServerStatus() }}</strong>
+        </p>
+        <p>Possible Server Status 
+            {{ (serverId%2 == 0) ? "online" : (serverId%2 == 1) ? "offline" : "" }}
+        </p>
     </div>
     <div class="col-sm-12">
         <p><app-server></app-server></p>
