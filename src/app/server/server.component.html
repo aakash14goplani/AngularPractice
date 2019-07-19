@@ -1,5 +1,7 @@
 <h3>From Server HTML:</h3>
 <h6>server.component.html</h6>
 <p>
-    <img [src]="imageURL" [width]="width" [height]="height" />
+    {{'Changing image alignment to '}} {{align}} <br>
+    <img [src]="imageURL" [width]="width" [height]="height" /> <br>
+    <button class="btn btn-secondary" (click)="onClickChangeAlignment()">Changing text</button>
 </p>
