@@ -3,5 +3,9 @@
 <p>
     {{'Changing image alignment to '}} {{align}} <br>
     <img [src]="imageURL" [width]="width" [height]="height" /> <br>
-    <button class="btn btn-secondary" (click)="onClickChangeAlignment()">Changing text</button>
+    <button class="btn btn-secondary" (click)="onClickChangeAlignment()">Changing text</button><br>
+    <input type="text" class="form-control" (input)="printData($event)" /><br>
+    {{'Input String: '}} {{someString}} <br>
+    <input type="text" class="form-control" [(ngModel)]="imageURL" /><br>
+    {{'Input String: '}} {{imageURL}}
 </p>
