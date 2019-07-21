@@ -1,11 +1,66 @@
 <h3>From Server HTML:</h3>
 <h6>server.component.html</h6>
-<p>
-    {{'Changing image alignment to '}} {{align}} <br>
-    <img [src]="imageURL" [width]="width" [height]="height" /> <br>
-    <button class="btn btn-secondary" (click)="onClickChangeAlignment()">Changing text</button><br>
+<hr>
+
+<div class="col-sm-6">
+    <!--interpolation binding-->
+    <h6>{{"This is an example of String interpolation of \"align\" property that is bound to change on button click using event binding"}}</h6>
+    <p>{{'Changing image alignment to '}} {{align}}</p>
+</div>
+<div class="col-sm-6">
+    <!--event binding-->
+    <h6>{{"This is an example of Event Binding of \"align\" property that is bound to change on button click"}}</h6>
+    <button class="btn btn-secondary" (click)="onClickChangeAlignment()">Changing text</button>
+</div>
+
+<div class="col-sm-6 margin-20-top-bottom">
+    <!--property binding-->
+    <h6>{{"This is an example of Property Binding '[]'"}}</h6>
+    <img [src]="imageURL" [width]="width" [height]="height" alt="property binding" />
+</div>
+<div class="col-sm-6 margin-20-top-bottom">
+    <!--canonical binding-->
+    <h6>{{"This is an example of Canonical Binding 'bind-'"}}</h6>
+    <img bind-src="imageURL" bind-width="width" bind-height="height" alt="cannonical binding" />
+</div>
+
+<div class="col-sm-6">
+    <!--event binding--> 
+    <h6>{{"This is an example of Event Binding using user input from \"$event\" variable that will change based on user input"}}</h6>  
     <input type="text" class="form-control" (input)="printData($event)" /><br>
-    {{'Input String: '}} {{someString}} <br>
+    <p>{{'Input String ($event): '}} {{someString}}</p>
+</div>
+<div class="col-sm-6">
+    <!--two-way binding-->
+    <h6>{{"This is an example of Two-way Binding using \"imageURL\" property wherein value will change dynamicaly on user input. It will be prefiled with already defined property in '.ts' file! As you change the URL, image above will also be changed!"}}</h6>
     <input type="text" class="form-control" [(ngModel)]="imageURL" /><br>
-    {{'Input String: '}} {{imageURL}}
-</p>
+    <p>{{'Input String: '}} {{imageURL}}</p>
+
+    <h6>ALIAS: property + event</h6>
+    <input [value]="username" (input)="username = $event.target.value">
+    <p>Hello {{username}}!</p>
+</div>
+
+<div class="col-sm-6">
+    <!--assignment: lec#32--> 
+    <h6>{{"This is an example from Assignment on Data Binding: 1"}}</h6>
+    <ol>
+        <li>input field which updates the propert 'username via two-way data binding'</li>
+        <li>o/p 'username' via string interpolation, in paragraph below input</li>
+    </ol>
+    <label>Enter username:</label> <input type="text" class="form-control" [(ngModel)]="username" /> <br>
+    <p>username entered is: {{username}}</p>
+</div>
+<div class="col-sm-6">
+    <!--assignment: lec#32-->
+    <h6>{{"This is an example from Assignment on Data Binding: 2"}}</h6>
+    <ol>
+        <li>add button that will be clicked if 'usename' is NOT empty</li>
+        <li>upon clicking button 'usename' should set to empty string</li>
+    </ol>
+    <button class="btn btn-primary" [disabled]="isUsernameEmpty()" (click)="deleteUsername()" >Delete 'username'</button>
+    <!--
+        better approach:
+        <button class="btn btn-primary" [disabled]="username === ''" (click)="username = ''">
+    -->
+</div>
