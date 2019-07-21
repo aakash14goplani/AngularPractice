@@ -3,7 +3,8 @@
         <p>Nested-Servers works!</p>
         <p>Checking Parent Server status...</p>
         <p>
-            {{ 'Parent Server' }} is currently <strong>{{ getServerStatus() }}</strong>
+            {{ 'Parent Server' }} is currently 
+            <strong [ngStyle]="{color: getColor()}">{{ getServerStatus() }}</strong>
         </p>
         <p>Possible Server Status 
             {{ (serverId%2 == 0) ? "online" : (serverId%2 == 1) ? "offline" : "" }}
@@ -13,3 +14,40 @@
         <p><app-server></app-server></p>
     </div>
 </div>
+
+<hr>
+<div class="row">
+    <h2>Assignment 1</h2>
+    <!-- look at component selector syntax and way of invocation -->
+    <div class="col-sm-12">
+        <h3>Calling Warning Component</h3>
+        <div app-warning-alert></div>
+    </div>
+    <div class="col-sm-12">
+        <h3>Calling Success Component</h3>
+        <div class="app-success-alert"></div>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col-sm-12">
+        <h2>From Maximillan</h2>
+        <label>Server Name</label>
+        <!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)"> -->
+        
+        <input type="text" class="form-control" [(ngModel)]="serverName">
+        <!-- <p>{{ serverName }}</p> -->
+        <button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()">Add Server</button>
+        <button class="btn btn-primary" [disabled]="serverName === ''" (click)="serverName = ''">Delete Server</button>
+        <!-- <p [innerText]="allowNewServer"></p>
+        <p>{{ serverCreationStatus }}</p> -->
+
+        <p *ngIf="serverCreated; else defaultMessage">Server created, server name: {{ serverName }}</p>
+        <ng-template #defaultMessage>
+            <p>No server was created</p>
+        </ng-template>    
+    </div>
+</div>
+
+<hr>
