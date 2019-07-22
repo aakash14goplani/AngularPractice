@@ -6,8 +6,8 @@
             {{ 'Parent Server' }} is currently 
             <strong [ngStyle]="{color: getColor()}">{{ getServerStatus() }}</strong>
         </p>
-        <p>Possible Server Status 
-            {{ (serverId%2 == 0) ? "online" : (serverId%2 == 1) ? "offline" : "" }}
+        <p [ngClass]="{'offline-temp': serverStatus === 'Offline'}">Possible Server Status 
+            {{ (serverId%2 == 0) ? "online" : "offline" }}
         </p>
     </div>
     <div class="col-sm-12">

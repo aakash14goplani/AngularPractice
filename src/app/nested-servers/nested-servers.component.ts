@@ -19,6 +19,7 @@ export class NestedServersComponent  {
       this.allowNewServer = true;
     }, 2000);
     this.serverStatus = Math.random() > 0.5 ? 'Online' : 'Offline';
+    this.serverId = Math.floor(Math.random() * 10) + 1;
   }
 
   getServerStatus() {

@@ -40,5 +40,5 @@ export class ServerComponent {
         return this.username = '';
     }
 // tslint:disable-next-line: max-line-length
-/* error faced. Event-bubbling, directive, structural directive * in *ngif, local-reference, ng-template, attribute directive, write article from line 24-27: placeholder in wiki */
+/* error faced. Event-bubbling, write article from line 24-27: placeholder in wiki, camel-case in ngStyles, gitignore updates, both works only in property binding */
 }
