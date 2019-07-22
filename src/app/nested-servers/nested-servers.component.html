@@ -64,10 +64,10 @@
         </div>
         <div class="col-sm-6">
             <button [class.btn] class="btn-primary" (click)="addServerInstance()">Add Server Instance</button> 
-            <ol [ngSwitch]="serversCollection.name">
-                <li *ngSwitchCase="'Server 1'">Default</li>
-                <li *ngSwitchCase="'Test_Server_'">Custom</li>
-                <li *ngSwitchDefault>None</li>
+            <ol [ngSwitch]="serverStatus">
+                <li *ngSwitchCase="'Online'">Online</li>
+                <li *ngSwitchCase="'Offline'">Offline</li>
+                <li *ngSwitchDefault>Unknown</li>
             </ol>
         </div>
     </div>
