@@ -46,7 +46,30 @@
         <p *ngIf="serverCreated; else defaultMessage">Server created, server name: {{ serverName }}</p>
         <ng-template #defaultMessage>
             <p>No server was created</p>
-        </ng-template>    
+        </ng-template>
+        
+        <div class="col-sm-6">
+            <table [border]="1">
+                <thead>
+                    <td>Server ID</td>
+                    <td>Server Name</td>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let serverInstance of serversCollection">
+                        <td>{{serverInstance.id}}</td>
+                        <td>{{serverInstance.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-6">
+            <button [class.btn] class="btn-primary" (click)="addServerInstance()">Add Server Instance</button> 
+            <ol [ngSwitch]="serversCollection.name">
+                <li *ngSwitchCase="'Server 1'">Default</li>
+                <li *ngSwitchCase="'Test_Server_'">Custom</li>
+                <li *ngSwitchDefault>None</li>
+            </ol>
+        </div>
     </div>
 </div>
 
