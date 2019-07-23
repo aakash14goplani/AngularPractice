@@ -32,19 +32,18 @@
     <!-- look at component selector syntax and way of invocation -->
     <div class="col-sm-6">
         <button [ngClass]="{btn:true, 'btn-secondary':true}" (click)="toggleVariableValue()">Display Details</button>
-        <p *ngIf="toggleValue"> {{toggleValue + " - " + loggerStyle + " - "}}
-            This course starts from scratch, you neither need to know Angular 1 nor Angular 2! Angular 8 simply is the latest version of Angular 2.
+        <p *ngIf="toggleValue">
+            Angular 8 simply is the latest version of Angular 2.
         </p>
     </div>
     <div class="col-sm-6">
-        <ul>
-            <ng-container *ngFor="let logInstance of logToggleValues">
-                <li *ngIf="counter<5">{{logInstance}}</li>
-                <li *ngIf="counter>4" [ngStyle]="loggerStyle" [ngClass]="{'offline-temp': loggerClass}">
-                    {{logInstance}}
-                </li>
-            </ng-container>
-        </ul>
+        <ol>
+            <li *ngFor="let logInstance of logToggleValues; let i=index" 
+                [ngStyle]="{'background-color': i>=4 ? 'blue' : 'transparent'}" 
+                [ngClass]="{'offline-temp': i>=4}">
+                {{logInstance}}
+            </li>
+        </ol>
     </div>
 </div>
 

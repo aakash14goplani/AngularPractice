@@ -21,9 +21,6 @@ export class NestedServersComponent  {
   ];
   toggleValue: boolean = true;
   logToggleValues: any[] = [];
-  counter: number = 0;
-  loggerStyle: Object = '';
-  loggerClass: boolean = false;
 
   constructor() {
     setTimeout(() => {
@@ -36,14 +33,9 @@ export class NestedServersComponent  {
   toggleVariableValue() {
     this.toggleValue = !this.toggleValue;
 
-    let currentDate = new Date();
-    this.logToggleValues.push(currentDate.getHours() + ":" + currentDate.getMinutes() +  ":" + currentDate.getSeconds() + ":" + currentDate.getMilliseconds());
-
-    this.counter++;
-    if(this.counter >= 5) {
-      this.loggerStyle = {'background-color': 'blue'};
-      this.loggerClass = true;
-    }
+    const currentDate = new Date();
+    // tslint:disable-next-line: max-line-length
+    this.logToggleValues.push(currentDate.getHours() + ':' + currentDate.getMinutes() +  ':' + currentDate.getSeconds() + ':' + currentDate.getMilliseconds());
   }
 
   getServerStatus() {
