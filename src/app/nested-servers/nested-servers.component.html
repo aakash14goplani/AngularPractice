@@ -63,7 +63,7 @@
             </table>
         </div>
         <div class="col-sm-6">
-            <button [class.btn] class="btn-primary" (click)="addServerInstance()">Add Server Instance</button> 
+            <button [ngClass]="'btn btn-primary'" (click)="addServerInstance()">Add Server Instance</button> 
             <ol [ngSwitch]="serverStatus">
                 <li *ngSwitchCase="'Online'">Online</li>
                 <li *ngSwitchCase="'Offline'">Offline</li>
