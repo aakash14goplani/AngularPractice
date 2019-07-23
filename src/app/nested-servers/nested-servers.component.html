@@ -19,13 +19,32 @@
 <div class="row">
     <h2>Assignment 1</h2>
     <!-- look at component selector syntax and way of invocation -->
-    <div class="col-sm-12">
+    <div class="col-sm-6">
         <h3>Calling Warning Component</h3>
         <div app-warning-alert></div>
     </div>
-    <div class="col-sm-12">
+    <div class="col-sm-6">
         <h3>Calling Success Component</h3>
         <div class="app-success-alert"></div>
+    </div>
+    <hr>
+    <h2>Assignment 2</h2>
+    <!-- look at component selector syntax and way of invocation -->
+    <div class="col-sm-6">
+        <button [ngClass]="{btn:true, 'btn-secondary':true}" (click)="toggleVariableValue()">Display Details</button>
+        <p *ngIf="toggleValue"> {{toggleValue + " - " + loggerStyle + " - "}}
+            This course starts from scratch, you neither need to know Angular 1 nor Angular 2! Angular 8 simply is the latest version of Angular 2.
+        </p>
+    </div>
+    <div class="col-sm-6">
+        <ul>
+            <ng-container *ngFor="let logInstance of logToggleValues">
+                <li *ngIf="counter<5">{{logInstance}}</li>
+                <li *ngIf="counter>4" [ngStyle]="loggerStyle" [ngClass]="{'offline-temp': loggerClass}">
+                    {{logInstance}}
+                </li>
+            </ng-container>
+        </ul>
     </div>
 </div>
 

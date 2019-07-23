@@ -19,6 +19,11 @@ export class NestedServersComponent  {
     {id: 3, name: 'Server 3'},
     {id: 4, name: 'Server 4'},
   ];
+  toggleValue: boolean = true;
+  logToggleValues: any[] = [];
+  counter: number = 0;
+  loggerStyle: Object = '';
+  loggerClass: boolean = false;
 
   constructor() {
     setTimeout(() => {
@@ -26,6 +31,19 @@ export class NestedServersComponent  {
     }, 2000);
     this.serverStatus = Math.random() > 0.5 ? 'Online' : 'Offline';
     this.serverId = Math.floor(Math.random() * 10) + 1;
+  }
+
+  toggleVariableValue() {
+    this.toggleValue = !this.toggleValue;
+
+    let currentDate = new Date();
+    this.logToggleValues.push(currentDate.getHours() + ":" + currentDate.getMinutes() +  ":" + currentDate.getSeconds() + ":" + currentDate.getMilliseconds());
+
+    this.counter++;
+    if(this.counter >= 5) {
+      this.loggerStyle = {'background-color': 'blue'};
+      this.loggerClass = true;
+    }
   }
 
   getServerStatus() {
