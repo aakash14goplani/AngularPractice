@@ -8,13 +8,14 @@ import { Recipe } from '../recipe.model';
 })
 export class RecipeListComponent implements OnInit {
 
+  recipeModelArray: Recipe[] = [ // tslint:disable-next-line: max-line-length
+    new Recipe('Paneer Roll', 'Paratha wrap with paneer filings', 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Paneer_Tikka_in_India.jpg')
+  ];
+
+
   constructor() { }
 
   ngOnInit() {
   }
-
-  recipeModelArray: Recipe[] = [
-    new Recipe('Paneer Roll', 'Paratha wrap with paneer filings', 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Paneer_Tikka_in_India.jpg')
-  ];
 
 }
