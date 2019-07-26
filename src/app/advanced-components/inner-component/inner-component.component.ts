@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InnerComponentComponent implements OnInit {
 
+  // serverDetailsArray: any[] = [];
+
   constructor() { }
 
   ngOnInit() {
