@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-xs-12">
+        <label>Server Name:</label>
+        <input type="text" class="form-control" [(ngModel)]="serverName" />
+        <hr>
+        <label>Server Content:</label>
+        <input type="text" class="form-control" [(ngModel)]="serverContents"/>
+        <hr>
+        <div class="col-xs-6">
+            <button class="btn btn-secondary" (click)="addServerContentsToArray('server')">Add Server</button>
+        </div>
+        <div class="col-xs-6">
+            <button class="btn btn-secondary" (click)="addServerContentsToArray('blueprint')">Add Server Blueprint</button>
+        </div>
+        <div class="panel panel-default" *ngFor="let element of serverDetailsArray">
+            <div class="panel-heading">{{ element.name }}</div>
+            <div class="panel-body">
+                <p>
+                    <strong *ngIf="element.type === 'server'" style="color: red">{{ element.content }}</strong>
+                    <em *ngIf="element.type === 'blueprint'" style="color: blue">{{ element.content }}</em>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
