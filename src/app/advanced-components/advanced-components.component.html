@@ -1,7 +1,8 @@
-<app-outer-component></app-outer-component>
+<!-- <app-outer-component (contentCreated)="manageServerContentsArray($event)"></app-outer-component> -->
+<app-outer-component (customElement)="manageServerContentsArray($event)"></app-outer-component>
 <hr>
 <div class="row">
     <div class="col-xs-12">
-        <app-inner-component *ngFor="let element of serverDetailsArray"></app-inner-component>
+        <app-inner-component *ngFor="let element of serverDetailsArray" [customElement]="element"></app-inner-component>
     </div>
 </div>

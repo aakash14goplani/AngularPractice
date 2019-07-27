@@ -7,10 +7,10 @@
         <input type="text" class="form-control" [(ngModel)]="serverContents"/>
         <br>
         <div class="col-xs-6">
-            <button class="btn btn-secondary" [disabled]="serverName === ''" (click)="addServerContentsToArray('server')">Add Server</button>
+            <button class="btn btn-secondary" [disabled]="serverName === ''" [ngStyle]="{'color': 'red'}" (click)="addServerContentsToArray('server')">Add Server</button>
         </div>
         <div class="col-xs-6">
-            <button class="btn btn-secondary" [disabled]="serverName === ''" (click)="addServerContentsToArray('blueprint')">Add Server Blueprint</button>
+            <button class="btn btn-secondary" [disabled]="serverName === ''" [ngStyle]="{'color': 'blue'}" (click)="addServerContentsToArray('blueprint')">Add Server Blueprint</button>
         </div>
     </div>
 </div>

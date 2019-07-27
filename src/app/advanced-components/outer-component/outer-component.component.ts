@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'app-outer-component',
@@ -9,7 +9,9 @@ export class OuterComponentComponent implements OnInit {
 
   serverName: string = '';
   serverContents: string = '';
-  // serverDetailsArray: any[] = [];
+  // @Output() contentCreated = new EventEmitter<{type: string, serverName: string, serverContents: string}>();
+  // tslint:disable-next-line: no-output-rename
+  @Output('customElement') contentCreated = new EventEmitter<{type: string, serverName: string, serverContents: string}>();
 
   constructor() { }
 
@@ -17,21 +19,10 @@ export class OuterComponentComponent implements OnInit {
   }
 
   addServerContentsToArray(inputType: string) {
-    let contentType = '';
-    if (inputType !== undefined) {
-      if (inputType.toLocaleLowerCase() === 'server') {
-        contentType = 'server';
-      } else if (inputType.toLocaleLowerCase() === 'blueprint') {
-        contentType = 'blueprint';
-      } else {
-        contentType = 'error';
-      }
-      this.serverDetailsArray.push({
-        type: contentType,
-        name: this.serverName,
-        content: this.serverContents
-      });
-    }
+    this.contentCreated.emit({
+      type: inputType,
+      serverName: this.serverName,
+      serverContents: this.serverContents
+    });
   }
-
 }

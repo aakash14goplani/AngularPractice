@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-inner-component',
@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InnerComponentComponent implements OnInit {
 
-  // serverDetailsArray: any[] = [];
+  // @Input() element: {type: string, name: string, content: string};
+  // tslint:disable-next-line: no-input-rename
+  @Input('customElement') element: {type: string, serverName: string, serverContent: string};
 
   constructor() { }
 
