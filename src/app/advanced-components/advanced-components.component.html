@@ -3,6 +3,9 @@
 <hr>
 <div class="row">
     <div class="col-xs-12">
-        <app-inner-component *ngFor="let element of serverDetailsArray" [customElement]="element"></app-inner-component>
+        <app-inner-component *ngFor="let element of serverDetailsArray" [customElement]="element">
+            <strong *ngIf="element.type === 'server'" style="color: red">{{ element.serverContent }}</strong>
+            <em *ngIf="element.type === 'blueprint'" style="color: blue">{{ element.serverContent }}</em>
+        </app-inner-component>
     </div>
 </div>
