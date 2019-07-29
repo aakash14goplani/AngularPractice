@@ -1,11 +1,24 @@
 <!-- <app-outer-component (contentCreated)="manageServerContentsArray($event)"></app-outer-component> -->
-<app-outer-component (customElement)="manageServerContentsArray($event)"></app-outer-component>
+<app-outer-component (customElement)="manageServerContentsArray($event)" [lifeCycleHookArray]="lifeCycleHook" (outerOutput)="inputFromOuter($event)"></app-outer-component>
 <hr>
 <div class="row">
     <div class="col-xs-12">
-        <app-inner-component *ngFor="let element of serverDetailsArray" [customElement]="element">
-            <strong *ngIf="element.type === 'server'" style="color: red">{{ element.serverContent }}</strong>
+        <app-inner-component *ngFor="let element of serverDetailsArray; let i=index" [customElement]="element" [lifeCycleHookArray]="lifeCycleHook" [iterationCount]="i" (innerOutput)="inputFromInner($event)">
+            <strong *ngIf="element.type === 'server'" style="color: red">{{ element.serverContent + " " + i}}</strong>
             <em *ngIf="element.type === 'blueprint'" style="color: blue">{{ element.serverContent }}</em>
         </app-inner-component>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="col-xs-6">
+        <h3>Life Cycle Hook HeadAche</h3>
+        <ol>
+            <li *ngFor="let hook of lifeCycleHook" [ngStyle]="applyStyles(hook)">{{hook}}</li>
+        </ol>
+    </div>
+    <div class="col-xs-6">
+        <h3>Life Cycle Hook Easy</h3>
+        <!-- <app-adv-shared-component></app-adv-shared-component> -->
     </div>
 </div>
