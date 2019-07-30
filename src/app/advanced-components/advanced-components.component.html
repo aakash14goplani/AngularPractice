@@ -1,7 +1,14 @@
 <div class="row">
+    <h3>Assignment</h3>
     <div class="col-xs-12">
-        <h3>Assignment</h3>
-        <app-game-control></app-game-control>
+        <app-game-control (eventFired)=gameAssignment($event)>
+            <div class="col-xs-6">
+                <app-odd *ngFor="let element of oddNumber" [number]="element"></app-odd>
+            </div>
+            <div class="col-xs-6">
+                <app-even *ngFor="let element of evenNumber" [number]="element"></app-even>
+            </div>
+        </app-game-control>
     </div>
 </div>
 <hr>

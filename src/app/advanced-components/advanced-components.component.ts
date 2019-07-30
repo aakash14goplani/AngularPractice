@@ -28,11 +28,17 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
   ];
 
   lifeCycleHook: string[] = [];
-  inst:AdvancedSharedComponent = new AdvancedSharedComponent();
+  inst: AdvancedSharedComponent = new AdvancedSharedComponent();
 
   constructor() {
     this.lifeCycleHook.push('Main Constructor');
     this.inst.printProperties('Main Constructor');
+  }
+
+  evenNumber: number[] = [];
+  oddNumber: number[] = [];
+  gameAssignment(numberData: number) {
+    (numberData % 2 === 0) ? this.evenNumber.push(numberData) : this.oddNumber.push(numberData);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
