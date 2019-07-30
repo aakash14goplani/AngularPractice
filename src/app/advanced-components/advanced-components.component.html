@@ -1,3 +1,10 @@
+<div class="row">
+    <div class="col-xs-12">
+        <h3>Assignment</h3>
+        <app-game-control></app-game-control>
+    </div>
+</div>
+<hr>
 <!-- <app-outer-component (contentCreated)="manageServerContentsArray($event)"></app-outer-component> -->
 <app-outer-component (customElement)="manageServerContentsArray($event)" [lifeCycleHookArray]="lifeCycleHook" (outerOutput)="inputFromOuter($event)"></app-outer-component>
 <hr>

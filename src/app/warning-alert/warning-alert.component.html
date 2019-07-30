@@ -1,1 +1,12 @@
-<p>warning-alert works!</p>
+<div class="row">
+    <div class="col-sm-12">
+        <p>{{parentMessage}}</p>
+        <h3>ViewChild</h3>
+        <p [ngStyle]="{color:'red'}">Passing single reference of child component</p>
+        <app-danger-alert [messageFromParent]="messageForChild"></app-danger-alert>
+        <h3>ViewChildren</h3>
+        <p>Passing multiple references of child component</p>
+        <app-danger-alert *ngFor="let element of messageForChildArray" [messageFromParent]="element"></app-danger-alert>
+        <h3>ContentChild</h3>
+    </div>
+</div>

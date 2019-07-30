@@ -11,6 +11,10 @@ import { AdvancedComponentsComponent } from './advanced-components/advanced-comp
 import { OuterComponentComponent } from './advanced-components/outer-component/outer-component.component';
 import { InnerComponentComponent } from './advanced-components/inner-component/inner-component.component';
 // import { AdvancedSharedComponent } from './advanced-components/shared-component.component';
+import { DangerAlertComponent } from './warning-alert/danger-alert/danger-alert.component';
+import { GameControlComponent } from './advanced-components/game-control/game-control.component';
+import { OddComponent } from './advanced-components/game-control/odd/odd.component';
+import { EvenComponent } from './advanced-components/game-control/even/even.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -19,6 +23,7 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
+
 
 
 @NgModule({
@@ -38,7 +43,11 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
     ShoppingEditComponent,
     AdvancedComponentsComponent,
     OuterComponentComponent,
-    InnerComponentComponent
+    InnerComponentComponent,
+    DangerAlertComponent,
+    GameControlComponent,
+    OddComponent,
+    EvenComponent
   ],
   imports: [
     BrowserModule,
