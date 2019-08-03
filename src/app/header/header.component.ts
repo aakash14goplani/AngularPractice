@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-header',
@@ -8,4 +8,9 @@ import { Component } from "@angular/core";
 
 export class HeaderComponent {
     collapsed: boolean = true;
+    @Output() displayContents = new EventEmitter<string>();
+
+    displayContentFor(contentType: string) {
+        this.displayContents.emit(contentType);
+    }
 }

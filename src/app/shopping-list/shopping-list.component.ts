@@ -17,6 +17,36 @@ export class ShoppingListComponent implements OnInit {
 
   constructor() { }
 
+  newIngredientItem(newIngredient: Ingredients) {
+    if (newIngredient.name.length > 0 && newIngredient.amount !== 0) {
+      const elePos = this.avoidDuplicate(newIngredient.name);
+      if (elePos === -1) {
+        this.ingredientsModelArray.push(new Ingredients(newIngredient.name, newIngredient.amount));
+      } else {
+        this.ingredientsModelArray[elePos - 1].amount++;
+      }
+    }
+  }
+
+  avoidDuplicate(ingredientName: string): number {
+    let position = 0;
+    let flag = false;
+    for (const iterator of this.ingredientsModelArray) {
+      if (iterator.name.toLowerCase() === ingredientName.toLowerCase()) {
+        position++;
+        flag = true;
+        break;
+      } else {
+        position++;
+      }
+    }
+    if (flag) {
+      return position;
+    } else {
+      return -1;
+    }
+  }
+
   ngOnInit() {
   }
 

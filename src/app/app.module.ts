@@ -10,7 +10,6 @@ import { SuccessAlertComponent } from './success-alert/success-alert.component';
 import { AdvancedComponentsComponent } from './advanced-components/advanced-components.component';
 import { OuterComponentComponent } from './advanced-components/outer-component/outer-component.component';
 import { InnerComponentComponent } from './advanced-components/inner-component/inner-component.component';
-// import { AdvancedSharedComponent } from './advanced-components/shared-component.component';
 import { DangerAlertComponent } from './warning-alert/danger-alert/danger-alert.component';
 import { GameControlComponent } from './advanced-components/game-control/game-control.component';
 import { OddComponent } from './advanced-components/game-control/odd/odd.component';
@@ -33,6 +32,13 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
     NestedServersComponent,
     WarningAlertComponent,
     SuccessAlertComponent,
+    AdvancedComponentsComponent,
+    OuterComponentComponent,
+    InnerComponentComponent,
+    DangerAlertComponent,
+    GameControlComponent,
+    OddComponent,
+    EvenComponent,
 
     HeaderComponent,
     RecipesComponent,
@@ -40,14 +46,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
     RecipeListComponent,
     RecipeItemComponent,
     ShoppingListComponent,
-    ShoppingEditComponent,
-    AdvancedComponentsComponent,
-    OuterComponentComponent,
-    InnerComponentComponent,
-    DangerAlertComponent,
-    GameControlComponent,
-    OddComponent,
-    EvenComponent
+    ShoppingEditComponent
   ],
   imports: [
     BrowserModule,
