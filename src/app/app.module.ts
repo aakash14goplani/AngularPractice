@@ -14,6 +14,8 @@ import { DangerAlertComponent } from './warning-alert/danger-alert/danger-alert.
 import { GameControlComponent } from './advanced-components/game-control/game-control.component';
 import { OddComponent } from './advanced-components/game-control/odd/odd.component';
 import { EvenComponent } from './advanced-components/game-control/even/even.component';
+import { BasicHighlightDirective } from './advanced-directives/basic-highlight/basic-highlight.directive';
+import { BatterHighlightDirective } from './advanced-directives/better-highlight/batter-highlight.directive';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -22,7 +24,7 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-
+import { AdvancedDirectivesComponent } from './advanced-directives/advanced-directives.component';
 
 
 @NgModule({
@@ -39,6 +41,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
     GameControlComponent,
     OddComponent,
     EvenComponent,
+    BasicHighlightDirective,
 
     HeaderComponent,
     RecipesComponent,
@@ -46,7 +49,9 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
     RecipeListComponent,
     RecipeItemComponent,
     ShoppingListComponent,
-    ShoppingEditComponent
+    ShoppingEditComponent,
+    AdvancedDirectivesComponent,
+    BatterHighlightDirective
   ],
   imports: [
     BrowserModule,
