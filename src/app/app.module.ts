@@ -16,6 +16,8 @@ import { OddComponent } from './advanced-components/game-control/odd/odd.compone
 import { EvenComponent } from './advanced-components/game-control/even/even.component';
 import { BasicHighlightDirective } from './advanced-directives/basic-highlight/basic-highlight.directive';
 import { BatterHighlightDirective } from './advanced-directives/better-highlight/batter-highlight.directive';
+import { AdvancedDirectivesComponent } from './advanced-directives/advanced-directives.component';
+import { OddGeneratorDirective } from './advanced-directives/odd-generator/odd-generator.directive';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -24,8 +26,7 @@ import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component
 import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { AdvancedDirectivesComponent } from './advanced-directives/advanced-directives.component';
-
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,9 @@ import { AdvancedDirectivesComponent } from './advanced-directives/advanced-dire
     OddComponent,
     EvenComponent,
     BasicHighlightDirective,
+    AdvancedDirectivesComponent,
+    BatterHighlightDirective,
+    OddGeneratorDirective,
 
     HeaderComponent,
     RecipesComponent,
@@ -50,8 +54,7 @@ import { AdvancedDirectivesComponent } from './advanced-directives/advanced-dire
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    AdvancedDirectivesComponent,
-    BatterHighlightDirective
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
