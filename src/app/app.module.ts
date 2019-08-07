@@ -18,6 +18,9 @@ import { BasicHighlightDirective } from './advanced-directives/basic-highlight/b
 import { BatterHighlightDirective } from './advanced-directives/better-highlight/batter-highlight.directive';
 import { AdvancedDirectivesComponent } from './advanced-directives/advanced-directives.component';
 import { OddGeneratorDirective } from './advanced-directives/odd-generator/odd-generator.directive';
+import { ServicesComponent } from './services/services.component';
+import { AccountComponent } from './services/account/account.component';
+import { NewAccountComponent } from './services/new-account/new-account.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -27,6 +30,7 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+
 
 @NgModule({
   declarations: [
@@ -46,6 +50,9 @@ import { DropdownDirective } from './shared/dropdown.directive';
     AdvancedDirectivesComponent,
     BatterHighlightDirective,
     OddGeneratorDirective,
+    ServicesComponent,
+    AccountComponent,
+    NewAccountComponent,
 
     HeaderComponent,
     RecipesComponent,
@@ -54,7 +61,7 @@ import { DropdownDirective } from './shared/dropdown.directive';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective
+    DropdownDirective,
   ],
   imports: [
     BrowserModule,
