@@ -21,6 +21,7 @@ import { OddGeneratorDirective } from './advanced-directives/odd-generator/odd-g
 import { ServicesComponent } from './services/services.component';
 import { AccountComponent } from './services/account/account.component';
 import { NewAccountComponent } from './services/new-account/new-account.component';
+import { AssignmentComponent } from './services/assignment/assignment.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -30,7 +31,9 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from './shared/dropdown.directive';
-import { AssignmentComponent } from './services/assignment/assignment.component';
+import { ActiveUsersComponent } from './services/assignment/active-users/active-users.component';
+import { InactiveUsersComponent } from './services/assignment/inactive-users/inactive-users.component';
+
 
 
 @NgModule({
@@ -54,6 +57,9 @@ import { AssignmentComponent } from './services/assignment/assignment.component'
     ServicesComponent,
     AccountComponent,
     NewAccountComponent,
+    AssignmentComponent,
+    ActiveUsersComponent,
+    InactiveUsersComponent,
 
     HeaderComponent,
     RecipesComponent,
@@ -62,8 +68,7 @@ import { AssignmentComponent } from './services/assignment/assignment.component'
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective,
-    AssignmentComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,

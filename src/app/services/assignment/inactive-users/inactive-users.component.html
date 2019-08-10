@@ -1,0 +1,24 @@
+<div class="col-sm-6">    
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title text-center">Inactive Users</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let user of inactiverUsersArray; let i=index">
+                        {{user}}
+                    <span class="badge badge-primary badge-pill">
+                        <a role="button" (click)="addUser(user)">   Add User</a>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="col-sm-6">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            Total # of users added: {{totalNumberOfUsersAdded}}
+        </div>
+    </div>
+</div>
