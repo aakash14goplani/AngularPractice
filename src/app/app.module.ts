@@ -22,6 +22,15 @@ import { ServicesComponent } from './services/services.component';
 import { AccountComponent } from './services/account/account.component';
 import { NewAccountComponent } from './services/new-account/new-account.component';
 import { AssignmentComponent } from './services/assignment/assignment.component';
+import { ActiveUsersComponent } from './services/assignment/active-users/active-users.component';
+import { InactiveUsersComponent } from './services/assignment/inactive-users/inactive-users.component';
+import { RoutingComponent } from './routing/routing.component';
+import { UsersComponent } from './routing/users/users.component';
+import { UserComponent } from './routing/users/user/user.component';
+import { RoutingServersComponent } from './routing/servers/servers.component';
+import { RoutingServerComponent } from './routing/servers/server/server.component';
+import { EditRoutingServerComponent } from './routing/servers/edit-server/edit-server.component';
+import { HomeComponent } from './routing/home/home.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -31,10 +40,6 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from './shared/dropdown.directive';
-import { ActiveUsersComponent } from './services/assignment/active-users/active-users.component';
-import { InactiveUsersComponent } from './services/assignment/inactive-users/inactive-users.component';
-
-
 
 @NgModule({
   declarations: [
@@ -60,6 +65,13 @@ import { InactiveUsersComponent } from './services/assignment/inactive-users/ina
     AssignmentComponent,
     ActiveUsersComponent,
     InactiveUsersComponent,
+    RoutingComponent,
+    UsersComponent,
+    UserComponent,
+    RoutingServersComponent,
+    RoutingServerComponent,
+    EditRoutingServerComponent,
+    HomeComponent,
 
     HeaderComponent,
     RecipesComponent,
