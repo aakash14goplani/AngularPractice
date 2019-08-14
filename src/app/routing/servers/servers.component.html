@@ -11,4 +11,12 @@
         <hr>
         <app-routing-server></app-routing-server>
     </div>
+    <div class="col-xs-6">
+        Error: <a routerLink="servers">Reload</a> using Roulter Link<br>
+        <a routerLink="/servers">Reload</a> using Roulter Link w/p error<br>
+    </div>
+    <div class="col-xs-6">
+        Error: <a (click)="onReload('error')">Reload</a> using Navigate<br>
+        <a (click)="onReload('noerror')">Reload</a> using Navigate w/p error<br>
+    </div>
 </div>
