@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-xs-12 col-sm-4">
         <div class="list-group">
-            <a href="#" class="list-group-item" *ngFor="let server of servers">
+            <a [routerLink]="['/servers', server.id]" [queryParams]="{allowEdit: '1'}" [fragment]="'loading'" class="list-group-item" *ngFor="let server of servers">
                 {{ server.name }}
             </a>
         </div>
@@ -9,7 +9,7 @@
     <div class="col-xs-12 col-sm-4">
         <app-edit-routing-server></app-edit-routing-server>
         <hr>
-        <app-routing-server></app-routing-server>
+        <!-- <app-routing-server></app-routing-server> -->
     </div>
     <div class="col-xs-6">
         Error: <a routerLink="servers">Reload</a> using Roulter Link<br>

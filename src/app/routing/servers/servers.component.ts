@@ -22,6 +22,8 @@ export class RoutingServersComponent implements OnInit {
       // this.router.navigate(['servers']);
       this.router.navigate(['/servers']);
     } else if (type === 'error') {
+      // console.log('ActivatedRoute: ', this.route);
+      // console.log('Router: ', this.router);
       this.router.navigate(['servers'], {relativeTo: this.route});
     }
   }
