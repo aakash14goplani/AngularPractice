@@ -31,6 +31,13 @@ import { RoutingServersComponent } from './routing/servers/servers.component';
 import { RoutingServerComponent } from './routing/servers/server/server.component';
 import { EditRoutingServerComponent } from './routing/servers/edit-server/edit-server.component';
 import { HomeComponent } from './routing/home/home.component';
+import { PageNotFoundComponent } from './routing/page-not-found/page-not-found.component';
+import { AppRoutingModule } from './app-routing.module';
+import { AuthGuard } from './routing/routing-services/auth-guard.service';
+import { AuthService } from './routing/routing-services/auth.service';
+import { CanDeactivateGuard } from './routing/servers/edit-server/can-deactivate-guard.service';
+import { ServerResolver } from './routing/servers/server/server-resolver.service';
+import { ServersRoutingService } from './routing/servers/servers.service';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -40,16 +47,7 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from './shared/dropdown.directive';
-import { Routes, RouterModule } from '@angular/router';
 
-const appRoute: Routes = [
-  {path: '', component: HomeComponent },
-  {path: 'users', component: UsersComponent },
-  {path: 'user/:id/:name', component: UserComponent },
-  {path: 'servers', component: RoutingServersComponent },
-  {path: 'servers/:id', component: RoutingServerComponent },
-  {path: 'servers/:id/edit', component: EditRoutingServerComponent }
-];
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +79,7 @@ const appRoute: Routes = [
     RoutingServerComponent,
     EditRoutingServerComponent,
     HomeComponent,
+    PageNotFoundComponent,
 
     HeaderComponent,
     RecipesComponent,
@@ -94,9 +93,9 @@ const appRoute: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
-    RouterModule.forRoot(appRoute)
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
