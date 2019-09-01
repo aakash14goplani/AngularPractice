@@ -47,6 +47,11 @@ import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-it
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
 import { DropdownDirective } from './shared/dropdown.directive';
+import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
+import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { ObservablesComponent } from './observables/observables.component';
+import { UserObservableComponent } from './observables/user-observable/user-observable.component';
+import { HomeObservableComponent } from './observables/home-observable/home-observable.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +93,12 @@ import { DropdownDirective } from './shared/dropdown.directive';
     RecipeItemComponent,
     ShoppingListComponent,
     ShoppingEditComponent,
-    DropdownDirective
+    DropdownDirective,
+    RecipesStartComponent,
+    RecipeEditComponent,
+    ObservablesComponent,
+    UserObservableComponent,
+    HomeObservableComponent
   ],
   imports: [
     BrowserModule,

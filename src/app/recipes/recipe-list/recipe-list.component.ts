@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 // import { Output, EventEmitter } from '@angular/core';
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recipe-list',
@@ -19,7 +20,7 @@ export class RecipeListComponent implements OnInit {
   recipeModelArray: Recipe[] = [];
   // @Output() recipeWasSelected = new EventEmitter<Recipe>();
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService, private router: Router, private route: ActivatedRoute) { }
 
   /* onRecipeSelected(recipe: Recipe) {
     this.recipeWasSelected.emit(recipe);
@@ -27,6 +28,10 @@ export class RecipeListComponent implements OnInit {
 
   ngOnInit() {
     this.recipeModelArray = this.recipeService.getRecipes();
+  }
+
+  createNewRecipe(): void {
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
 }

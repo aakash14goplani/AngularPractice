@@ -20,6 +20,14 @@ export class RecipeService {
         returning array.slice() passes copy of ref and original array-data remains intact */
     }
 
+    getRecipesById(i: number): Recipe {
+        if (i >= 0 && i < this.recipeModelArray.length) {
+            return this.recipeModelArray[i];
+        } else {
+            return this.recipeModelArray[0];
+        }
+    }
+
     constructor(private shoppingListService: ShoppingListService) {}
 
     addIngridentsToShoppingList(ingredient: Ingredients[]) {

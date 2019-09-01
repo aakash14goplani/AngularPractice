@@ -7,10 +7,10 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 
 export class HeaderComponent {
-    collapsed: boolean = true;
+    /* collapsed: boolean = true;
     @Output() displayContents = new EventEmitter<string>();
 
     displayContentFor(contentType: string) {
         this.displayContents.emit(contentType);
-    }
+    } */
 }

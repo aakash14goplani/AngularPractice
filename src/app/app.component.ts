@@ -10,9 +10,9 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 })
 export class AppComponent {
   title = 'angular-basics';
-  displayDataFor: string = 'recipe';
+  /* displayDataFor: string = 'recipe';
 
   contentsToDisplay(eventData: string) {
     this.displayDataFor = eventData;
-  }
+  } */
 }
