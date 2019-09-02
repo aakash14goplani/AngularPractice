@@ -38,6 +38,10 @@ import { AuthService } from './routing/routing-services/auth.service';
 import { CanDeactivateGuard } from './routing/servers/edit-server/can-deactivate-guard.service';
 import { ServerResolver } from './routing/servers/server/server-resolver.service';
 import { ServersRoutingService } from './routing/servers/servers.service';
+import { ObservablesComponent } from './observables/observables.component';
+import { UserObservableComponent } from './observables/user-observable/user-observable.component';
+import { HomeObservableComponent } from './observables/home-observable/home-observable.component';
+import { AngularFormsComponent } from './angular-forms/angular-forms.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -49,9 +53,6 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { ObservablesComponent } from './observables/observables.component';
-import { UserObservableComponent } from './observables/user-observable/user-observable.component';
-import { HomeObservableComponent } from './observables/home-observable/home-observable.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,10 @@ import { HomeObservableComponent } from './observables/home-observable/home-obse
     EditRoutingServerComponent,
     HomeComponent,
     PageNotFoundComponent,
+    ObservablesComponent,
+    UserObservableComponent,
+    HomeObservableComponent,
+    AngularFormsComponent,
 
     HeaderComponent,
     RecipesComponent,
@@ -95,10 +100,7 @@ import { HomeObservableComponent } from './observables/home-observable/home-obse
     ShoppingEditComponent,
     DropdownDirective,
     RecipesStartComponent,
-    RecipeEditComponent,
-    ObservablesComponent,
-    UserObservableComponent,
-    HomeObservableComponent
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,

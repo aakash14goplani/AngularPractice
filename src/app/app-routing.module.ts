@@ -57,7 +57,7 @@ const observables = [
         // RouterModule.forRoot(appRoute, { useHash: true })
         // RouterModule.forRoot(appRoute)
         // RouterModule.forRoot(recipesAppRoute)
-        RouterModule.forRoot(observables)
+        // RouterModule.forRoot(observables)
     ],
     exports: [
         RouterModule

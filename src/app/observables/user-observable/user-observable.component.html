@@ -1,1 +1,3 @@
 <p>User with <strong>ID {{ id }}</strong> was loaded</p>
+<button class="btn btn-success" (click)="activateUser()" *ngIf="!userActive">Activate User</button>
+<button class="btn btn-danger" (click)="activateUser()" *ngIf="userActive">Deactivate User</button>

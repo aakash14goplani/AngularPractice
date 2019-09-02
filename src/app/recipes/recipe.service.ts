@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { Recipe } from './recipe.model';
 import { Ingredients } from '../shared/ingredients.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class RecipeService {
@@ -12,7 +13,8 @@ export class RecipeService {
         new Recipe('Paneer Sandwich', 'Paneer patty with vegetables and sauces', 'https://d3tfnts8u422oi.cloudfront.net/386x386/priya-mani1466521594576957faffd23.jpg', [new Ingredients('bread slice', 2), new Ingredients('paneer paties', 1), new Ingredients('vegetables', 3)])
     ];
 
-    recipeSelected = new EventEmitter<Recipe>();
+    // recipeSelected = new EventEmitter<Recipe>();
+    recipeSelected = new Subject<Recipe>();
 
     getRecipes(): Recipe[] {
         return this.recipeModelArray.slice();
