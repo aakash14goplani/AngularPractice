@@ -42,6 +42,8 @@ import { ObservablesComponent } from './observables/observables.component';
 import { UserObservableComponent } from './observables/user-observable/user-observable.component';
 import { HomeObservableComponent } from './observables/home-observable/home-observable.component';
 import { AngularFormsComponent } from './angular-forms/angular-forms.component';
+import { TdFormAssignmentComponent } from './angular-forms/td-form-assignment/td-form-assignment.component';
+import { ReactiveFormsComponent } from './angular-forms/reactive-forms/reactive-forms.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -100,7 +102,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     ShoppingEditComponent,
     DropdownDirective,
     RecipesStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    TdFormAssignmentComponent,
+    ReactiveFormsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,27 +1,75 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-            <form>
-                <div id="user-data">
+            <!-- <form (ngSubmit)="onSubmit(form)" #form="ngForm"> -->
+            <form (ngSubmit)="onSubmit()" #form="ngForm">
+                <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" id="username" class="form-control">
+                        <input type="text" id="username" class="form-control" ngModel name="username" required #nameInput="ngModel">
+                        <span class="help-block" *ngIf="!nameInput.valid && nameInput.touched">Please enter a valid username</span>
                     </div>
-                    <button class="btn btn-default" type="button">Suggest an Username</button>
+                    <button class="btn btn-default" (click)="suggestUserName()" type="button">Suggest an Username</button>
                     <div class="form-group">
                         <label for="email">Mail</label>
-                        <input type="email" id="email" class="form-control">
+                        <input type="email" id="email" class="form-control" ngModel name="email" required email #emailInput="ngModel">
+                        <span class="help-block" *ngIf="!emailInput.valid && emailInput.touched">Please enter a valid email</span>
                     </div>
                 </div>
+                <span class="help-block" *ngIf="!userData.valid && userData.touched">**Please enter valid user data**</span>
                 <div class="form-group">
                     <label for="secret">Secret Questions</label>
-                    <select id="secret" class="form-control">
+                    <select id="secret" class="form-control" [ngModel]="defaultQuestion" name="secret">
                         <option value="pet">Your first Pet?</option>
                         <option value="teacher">Your first teacher?</option>
                     </select>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                 <div class="form-group">
+                    <textarea name="questionAnswer" id="questionAnswer" rows="3" class="form-control" [(ngModel)]="answer"></textarea>
+                    <span>Your reply: {{ answer }}</span>
+                </div>
+                <div class="form-group">
+                    <label for="game">Select Game</label>
+                    <div class="radio" *ngFor="let game of games">
+                        <input type="radio" name="game" [value]="game" [ngModel]="defaultGame">
+                        <label>{{ game }}</label>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
             </form>
+        </div>
+    </div>
+    <div class="row" *ngIf="submitted">
+        <hr>
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <table class="table table-bordered table-responsive table-striped table-hover">
+                <thead class="thead-dark">
+                    <td>User Content</td>
+                    <td>Values</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <td>Secret Question</td>
+                        <td>{{ user.secret }}</td>
+                    </tr>
+                    <tr>
+                        <td>Answer</td>
+                        <td>{{ user.questionAnswer }}</td>
+                    </tr>
+                    <tr>
+                        <td>Game</td>
+                        <td>{{ user.game }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>  
