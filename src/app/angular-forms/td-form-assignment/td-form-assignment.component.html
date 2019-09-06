@@ -1,4 +1,3 @@
-<p>td-form-assignment works!</p>
 <!--
     1. email: required
     2. dropdown subscription: basic, advanced (default), pro
@@ -9,3 +8,60 @@
         - print form value in console after submit
         - print data in template after submit
 -->
+<div class="col-sm-12">
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input class="form-control" type="email" id="email" name="email" ngModel required email #emailInput="ngModel">
+            <p class="help-block" *ngIf="!emailInput.valid && emailInput.touched">Please enter a valid email address</p>
+        </div>
+
+        <div class="form-group">
+            <label for="subscription">Subscription:</label>
+            <select class="form-control" id="subscription" name="subscription" [ngModel]='defaultSubscription'>
+                <option *ngFor="let item of subscription">{{ item }}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input class="form-control" type="password" id="password" name="password" ngModel required #passwordInput="ngModel">
+            <p class="help-block" *ngIf="!passwordInput.valid && passwordInput.touched">Please enter password</p>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Submit</button>
+            </div>
+            <div class="col-sm-6">
+                <button type="button" (click)="onReset()" class="btn btn-default">Reset</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="col-sm-12" *ngIf="formSubmitted"> 
+    <hr>
+    <table class="table table-bordered table-responsive table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <td>Content</td>
+                <td>Values</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Email</td>
+                <td>{{ assignment.email }}</td>
+            </tr>
+            <tr>
+                <td>Subscription</td>
+                <td>{{ assignment.subscription }}</td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>{{ assignment.password }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
