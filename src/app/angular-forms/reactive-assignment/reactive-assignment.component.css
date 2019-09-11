@@ -16,11 +16,3 @@ input.ng-pending {
 .help-block-pending {
     color: blue;
 }
-
-input[type='radio'] {
-    margin-left: 0;
-}
-
-input[type="checkbox"] {
-    margin-right: 4px;
-}

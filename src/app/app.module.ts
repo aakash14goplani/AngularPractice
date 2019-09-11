@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { ServerComponent } from './server/server.component';
@@ -44,6 +44,7 @@ import { HomeObservableComponent } from './observables/home-observable/home-obse
 import { AngularFormsComponent } from './angular-forms/angular-forms.component';
 import { TdFormAssignmentComponent } from './angular-forms/td-form-assignment/td-form-assignment.component';
 import { ReactiveFormsComponent } from './angular-forms/reactive-forms/reactive-forms.component';
+import { ReactiveAssignmentComponent } from './angular-forms/reactive-assignment/reactive-assignment.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -104,11 +105,13 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     RecipesStartComponent,
     RecipeEditComponent,
     TdFormAssignmentComponent,
-    ReactiveFormsComponent
+    ReactiveFormsComponent,
+    ReactiveAssignmentComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule
   ],
   providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService],
