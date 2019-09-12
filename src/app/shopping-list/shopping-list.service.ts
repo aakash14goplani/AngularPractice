@@ -14,12 +14,27 @@ export class ShoppingListService {
 
     // ingredientsChanged = new EventEmitter<Ingredients[]>();
     ingredientsChanged = new Subject<Ingredients[]>();
+    ingredientEdit = new Subject<number>();
 
-    getIngredients(): Ingredients[] {
+    public getIngredients(): Ingredients[] {
         return this.ingredientsModelArray.slice();
     }
 
-    addIngredient(newIngredient: Ingredients) {
+    public getIngredient(index: number): Ingredients {
+        return this.ingredientsModelArray[index];
+    }
+
+    public updateIngredient(index: number, ingredient: Ingredients) {
+        this.ingredientsModelArray[index] = ingredient;
+        this.ingredientsChanged.next(this.ingredientsModelArray.slice());
+    }
+
+    public deleteIngredient(index: number): void {
+        this.ingredientsModelArray.splice(index, 1);
+        this.ingredientsChanged.next(this.ingredientsModelArray.slice());
+    }
+
+    public addIngredient(newIngredient: Ingredients) {
         if (newIngredient.name.length > 0 && newIngredient.amount !== 0) {
             const elePos = this.avoidDuplicate(newIngredient.name);
             if (elePos === -1) {
@@ -32,7 +47,7 @@ export class ShoppingListService {
         }
     }
 
-    avoidDuplicate(ingredientName: string): number {
+    private avoidDuplicate(ingredientName: string): number {
         let position = 0;
         let flag = false;
         for (const iterator of this.ingredientsModelArray) {
@@ -51,7 +66,7 @@ export class ShoppingListService {
         }
     }
 
-    ingredientsFromRecipe(ingredients: Ingredients[]) {
+    public ingredientsFromRecipe(ingredients: Ingredients[]) {
         /* this approach fires multiple events which may blow up application, instead we can add all our ingredients
         in a list and then fire single event */
         for (const ingredient of ingredients) {
