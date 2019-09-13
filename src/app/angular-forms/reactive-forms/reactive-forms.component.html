@@ -40,7 +40,7 @@
                     <div class="col-sm-10">
                         <label *ngFor="let nat of signupForm.get('nationality').controls; let i = index">
                             <input type="checkbox" [formControlName]="i">
-                            {{ nationalityArray[i].name }}
+                            {{ nationalityArray[i] }}
                         </label>
                     </div>
                 </div> -->

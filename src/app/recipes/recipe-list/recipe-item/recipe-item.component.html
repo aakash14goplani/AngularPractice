@@ -1,8 +1,8 @@
 <!-- <a href="#" class="list-group-item clearfix" (click)="onSelected()"> -->
 <a [routerLink]="[index]" routerLinkActive="active" class="list-group-item clearfix" style="cursor: pointer;">
     <div class="pull-left">
-        <h4 class="list-group-item-heading">{{recipe.name}}</h4>
-        <p class="list-group-item-text">{{recipe.description}}</p>
+        <h4 class="list-group-item-heading wrapper">{{recipe.name}}</h4>
+        <p class="list-group-item-text wrapper">{{recipe.description}}</p>
     </div>
     <span class="pull-right">
         <img [src]="recipe.imagePath" alt="{{recipe.name}}" [ngClass]="{'img-responsive': true}" [ngStyle]="{'max-height':'50px'}">

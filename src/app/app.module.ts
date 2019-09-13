@@ -56,6 +56,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipeService } from './recipes/recipe.service';
+import { ShoppingListService } from './shopping-list/shopping-list.service';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     UserObservableComponent,
     HomeObservableComponent,
     AngularFormsComponent,
+    TdFormAssignmentComponent,
+    ReactiveFormsComponent,
+    ReactiveAssignmentComponent,
 
     HeaderComponent,
     RecipesComponent,
@@ -103,10 +108,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     ShoppingEditComponent,
     DropdownDirective,
     RecipesStartComponent,
-    RecipeEditComponent,
-    TdFormAssignmentComponent,
-    ReactiveFormsComponent,
-    ReactiveAssignmentComponent
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
@@ -114,7 +116,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService],
+  providers: [RecipeService, ShoppingListService, AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

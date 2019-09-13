@@ -13,16 +13,19 @@ export class RecipeService {
         new Recipe('Paneer Sandwich', 'Paneer patty with vegetables and sauces', 'https://d3tfnts8u422oi.cloudfront.net/386x386/priya-mani1466521594576957faffd23.jpg', [new Ingredients('bread slice', 2), new Ingredients('paneer paties', 1), new Ingredients('vegetables', 3)])
     ];
 
+    constructor(private shoppingListService: ShoppingListService) {}
+
     // recipeSelected = new EventEmitter<Recipe>();
     recipeSelected = new Subject<Recipe>();
+    recipeChanged = new Subject<Recipe[]>();
 
-    getRecipes(): Recipe[] {
+    public getRecipes(): Recipe[] {
         return this.recipeModelArray.slice();
         /* return this.array would have passes ref of this array to outside world and hence they can modify our data
         returning array.slice() passes copy of ref and original array-data remains intact */
     }
 
-    getRecipesById(i: number): Recipe {
+    public getRecipesById(i: number): Recipe {
         if (i >= 0 && i < this.recipeModelArray.length) {
             return this.recipeModelArray[i];
         } else {
@@ -30,9 +33,30 @@ export class RecipeService {
         }
     }
 
-    constructor(private shoppingListService: ShoppingListService) {}
-
-    addIngridentsToShoppingList(ingredient: Ingredients[]) {
+    public addIngridentsToShoppingList(ingredient: Ingredients[]) {
         this.shoppingListService.ingredientsFromRecipe(ingredient);
+    }
+
+    public updateRecipe(index: number, recipe: Recipe): void {
+        if (index >= 0 && index < this.recipeModelArray.length && recipe != null) {
+            this.recipeModelArray[index] = recipe;
+            this.recipeChanged.next(this.recipeModelArray.slice());
+        } else {
+            console.log('invalid params passed to updateRecipe method of recipe service: ', index, ' ', recipe);
+        }
+    }
+
+    public addRecipe(recipe: Recipe): void {
+        if (recipe != null) {
+            this.recipeModelArray.push(recipe);
+            this.recipeChanged.next(this.recipeModelArray.slice());
+        }
+    }
+
+    public deleteRecipe(index: number): void {
+        if (index >= 0 && index < this.recipeModelArray.length) {
+            this.recipeModelArray.splice(index, 1);
+            this.recipeChanged.next(this.recipeModelArray);
+        }
     }
 }

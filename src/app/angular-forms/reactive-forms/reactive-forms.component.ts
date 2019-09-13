@@ -10,11 +10,7 @@ import { Observable } from 'rxjs';
 export class ReactiveFormsComponent implements AfterViewChecked, OnInit {
 
   genders: string[] = ['male', 'female', 'others'];
-  nationalityArray = [
-    {id: 0, name: 'indian'},
-    {id: 1, name: 'american'},
-    {id: 2, name: 'african'}
-  ];
+  nationalityArray = ['indian', 'american', 'african'];
   signupForm: FormGroup;
   @ViewChild('form', {static: false}) formData: NgForm;
   forbiddenUserNames: string[] = ['Aakash', 'Goplani'];
@@ -75,11 +71,14 @@ export class ReactiveFormsComponent implements AfterViewChecked, OnInit {
   }
 
   addCheckboxes(): void {
+    for (const nationality of this.nationalityArray) {
+      (this.signupForm.get('nationality') as FormArray).push(new FormControl(nationality));
+    }
+    /*
     this.nationalityArray.map((value, index) => {
       const checkboxControl = new FormControl(null);
       (this.signupForm.get('nationality') as FormArray).push(checkboxControl);
     });
-    /*
       http://marcusresell.com/2018/07/18/dynamic-checkbox-angular/
       https://medium.com/xebia-engineering/multi-checkbox-form-control-angular7-39cbdabede57
       https://coryrylan.com/blog/creating-a-dynamic-checkbox-list-in-angular
