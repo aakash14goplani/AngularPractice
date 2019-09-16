@@ -35,20 +35,14 @@ export class ShoppingListService {
     }
 
     public addIngredient(newIngredient: Ingredients) {
-        console.log('recived ingredient: ', newIngredient);
         if (newIngredient.name.length > 0 && newIngredient.amount !== 0) {
-            console.log('before adding: ', this.ingredientsModelArray.length);
             const elePos = this.avoidDuplicate(newIngredient.name);
             if (elePos === -1) {
                 this.ingredientsModelArray.push(newIngredient);
-                // this.ingredientsChanged.emit(this.ingredientsModelArray.slice());
             } else {
                 this.ingredientsModelArray[elePos - 1].amount += newIngredient.amount;
             }
             this.ingredientsChanged.next(this.ingredientsModelArray.slice());
-            console.log('after adding: ', this.ingredientsModelArray.length);
-        } else {
-            console.log('unable to add');
         }
     }
 
@@ -72,7 +66,6 @@ export class ShoppingListService {
     }
 
     public ingredientsFromRecipe(ingredients: Ingredients[]) {
-        console.log('adding ingredient');
         /* this approach fires multiple events which may blow up application, instead we can add all our ingredients
         in a list and then fire single event */
         for (const ingredient of ingredients) {
