@@ -45,6 +45,8 @@ import { AngularFormsComponent } from './angular-forms/angular-forms.component';
 import { TdFormAssignmentComponent } from './angular-forms/td-form-assignment/td-form-assignment.component';
 import { ReactiveFormsComponent } from './angular-forms/reactive-forms/reactive-forms.component';
 import { ReactiveAssignmentComponent } from './angular-forms/reactive-assignment/reactive-assignment.component';
+import { PipesComponent } from './pipes/pipes.component';
+import { CamelCase } from './pipes/camelcase.pipe';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -56,6 +58,8 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { FilterPipe } from './pipes/filter.pipe';
+import { HighlighterPipe } from './pipes/highlighter.pipe';
 
 @NgModule({
   declarations: [
@@ -96,6 +100,8 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     TdFormAssignmentComponent,
     ReactiveFormsComponent,
     ReactiveAssignmentComponent,
+    PipesComponent,
+    CamelCase,
 
     HeaderComponent,
     RecipesComponent,
@@ -106,7 +112,9 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     ShoppingEditComponent,
     DropdownDirective,
     RecipesStartComponent,
-    RecipeEditComponent
+    RecipeEditComponent,
+    FilterPipe,
+    HighlighterPipe
   ],
   imports: [
     BrowserModule,

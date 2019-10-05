@@ -1,0 +1,54 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <h4>Application Status: <span [ngStyle]="bgStyle">{{ appStatus | async }}</span></h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <div class="form-group">
+                <button class="btn btn-primary" (click)="addServer()">Add New Server</button>
+            </div>
+            <div class="form-group">
+                <label for="filterInput">Filter Input</label>
+                <input type="text" class="form-control" [(ngModel)]="filterInput">
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let server of servers | filter: filterInput: 'status'" [ngClass]="getStatusClasses(server)">
+                    <span class="badge">{{ server.status }}</span>
+                    <strong>{{ server.name | camelcase: true }}</strong> | 
+                    {{ server.instanceType | uppercase }} | 
+                    {{ server.started | date: 'dd MMMM, yyyy' | lowercase }}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2 text-center">
+            <h2>Assignment</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+            <table class="table table-responsive table-bordered">
+                <thead>
+                    <tr>
+                        <td>Name</td>
+                        <td>Instance Type</td>
+                        <td>Date</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let server of servers | highlighter: 'name': 1">
+                        <td>{{ server.name | camelcase: true }}</td>
+                        <td>{{ server.instanceType }}</td>
+                        <td>{{ server.started | date: 'dd MMMM, yyyy' }}</td>
+                        <td>{{ server.status | uppercase }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
