@@ -47,6 +47,9 @@ import { ReactiveFormsComponent } from './angular-forms/reactive-forms/reactive-
 import { ReactiveAssignmentComponent } from './angular-forms/reactive-assignment/reactive-assignment.component';
 import { PipesComponent } from './pipes/pipes.component';
 import { CamelCase } from './pipes/camelcase.pipe';
+import { FilterPipe } from './pipes/filter.pipe';
+import { HighlighterPipe } from './pipes/highlighter.pipe';
+import { HttpComponent } from './http/http.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -58,8 +61,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { FilterPipe } from './pipes/filter.pipe';
-import { HighlighterPipe } from './pipes/highlighter.pipe';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -102,6 +104,9 @@ import { HighlighterPipe } from './pipes/highlighter.pipe';
     ReactiveAssignmentComponent,
     PipesComponent,
     CamelCase,
+    FilterPipe,
+    HighlighterPipe,
+    HttpComponent,
 
     HeaderComponent,
     RecipesComponent,
@@ -112,15 +117,14 @@ import { HighlighterPipe } from './pipes/highlighter.pipe';
     ShoppingEditComponent,
     DropdownDirective,
     RecipesStartComponent,
-    RecipeEditComponent,
-    FilterPipe,
-    HighlighterPipe
+    RecipeEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService],
   bootstrap: [AppComponent]
