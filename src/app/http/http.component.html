@@ -4,11 +4,11 @@
             <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" required ngModel name="title"/>
+                    <input type="text" class="form-control" id="title" required [(ngModel)]="title" name="title"/>
                 </div>
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control" id="content" required ngModel name="content"></textarea>
+                    <textarea class="form-control" id="content" required [(ngModel)]="content" name="content"></textarea>
                 </div>
                 <button class="btn btn-primary" type="submit" [disabled]="!postForm.valid">Send Post</button>
             </form>
@@ -22,8 +22,38 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3" *ngIf="addedPosts.length > 0">
+            <h2>Created Posts</h2>
+        </div>
         <div class="col-xs-12 col-md-6 col-md-offset-3">
-            <p>No posts available!</p>
+            <ul class="list-group" *ngIf="addedPosts.length > 0">
+                <li class="list-group-item" *ngFor="let post of addedPosts">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content }}</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3" *ngIf="loadedPosts.length > 0 && !isFetching">
+            <h2>Fetched Posts</h2>
+        </div>
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <ul class="list-group" *ngIf="loadedPosts.length > 0 && !isFetching; else error">
+                <li class="list-group-item" *ngFor="let post of loadedPosts">
+                    <h3>{{ post.title }}</h3>
+                    <p>{{ post.content }}</p>
+                </li>
+            </ul>
+            <ng-template #error>
+                <p *ngIf="loadedPosts.length < 1 && !isFetching">No posts available!</p>
+                <p *ngIf="isFetching && !errorMessage">Loading...</p>
+            </ng-template>
+            <div class="alert alert-danger" *ngIf="errorMessage">
+                <h3>Error Occured</h3>
+                <p>{{ errorMessage }}</p>
+                <button class="btn btn-danger" (click)="handleError()">Exit</button>
+            </div>
         </div>
     </div>
 </div>  

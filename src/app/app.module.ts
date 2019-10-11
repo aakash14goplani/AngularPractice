@@ -50,6 +50,9 @@ import { CamelCase } from './pipes/camelcase.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { HighlighterPipe } from './pipes/highlighter.pipe';
 import { HttpComponent } from './http/http.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './http/auth-interceptor.service';
+import { LoggingInterceptorService } from './http/logging-interceptor.service';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -61,7 +64,6 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -126,7 +128,18 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService],
+  providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoggingInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
