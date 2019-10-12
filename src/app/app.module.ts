@@ -64,6 +64,10 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { DropdownDirective } from './shared/dropdown.directive';
 import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
+import { RecipesResolverService } from './recipes/recipes-resolver.service';
+import { RecipeService } from './recipes/recipe.service';
+import { ShoppingListService } from './shopping-list/shopping-list.service';
+import { DataStorageService } from './shared/data-storage.service';
 
 @NgModule({
   declarations: [
@@ -129,6 +133,7 @@ import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component
     HttpClientModule
   ],
   providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,
+    RecipeService, ShoppingListService, DataStorageService, RecipesResolverService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,

@@ -7,11 +7,30 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class RecipeService {
 
-    private recipeModelArray: Recipe[] = [ // tslint:disable-next-line: max-line-length
-        new Recipe('Paneer Roll', 'Paratha wrap with paneer filings', 'https://upload.wikimedia.org/wikipedia/commons/a/a7/Paneer_Tikka_in_India.jpg', [new Ingredients('roti', 1), new Ingredients('paneer', 4), new Ingredients('vegetables', 3)]),
-        // tslint:disable-next-line: max-line-length
-        new Recipe('Paneer Sandwich', 'Paneer patty with vegetables and sauces', 'https://d3tfnts8u422oi.cloudfront.net/386x386/priya-mani1466521594576957faffd23.jpg', [new Ingredients('bread slice', 2), new Ingredients('paneer paties', 1), new Ingredients('vegetables', 3)])
-    ];
+    /* comment static data, fetch dynamic data from firebase using http
+    private recipeModelArray: Recipe[] = [
+        new Recipe(
+            'Paneer Roll',
+            'Paratha wrap with paneer filings',
+            'https://upload.wikimedia.org/wikipedia/commons/a/a7/Paneer_Tikka_in_India.jpg',
+            [
+                new Ingredients('roti', 1),
+                new Ingredients('paneer', 4),
+                new Ingredients('vegetables', 3)
+            ]
+        ),
+        new Recipe(
+            'Paneer Sandwich',
+            'Paneer patty with vegetables and sauces',
+            'https://d3tfnts8u422oi.cloudfront.net/386x386/priya-mani1466521594576957faffd23.jpg',
+            [
+                new Ingredients('bread slice', 2),
+                new Ingredients('paneer paties', 1),
+                new Ingredients('vegetables', 3)
+            ]
+        )
+    ]; */
+    private recipeModelArray: Recipe[] = [];
 
     constructor(private shoppingListService: ShoppingListService) {}
 
@@ -51,6 +70,11 @@ export class RecipeService {
             this.recipeModelArray.push(recipe);
             this.recipeChanged.next(this.recipeModelArray.slice());
         }
+    }
+
+    public setRecipes(recipes: Recipe[]): void {
+        this.recipeModelArray = recipes;
+        this.recipeChanged.next(this.recipeModelArray.slice());
     }
 
     public deleteRecipe(index: number): void {
