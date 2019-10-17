@@ -69,6 +69,7 @@ import { RecipesResolverService } from './recipes/recipes-resolver.service';
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { DataStorageService } from './shared/data-storage.service';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -125,7 +126,8 @@ import { DataStorageService } from './shared/data-storage.service';
     DropdownDirective,
     RecipesStartComponent,
     RecipeEditComponent,
-    TestingComponent
+    TestingComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

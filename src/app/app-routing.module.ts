@@ -19,6 +19,7 @@ import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.com
 import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipesResolverService } from './recipes/recipes-resolver.service';
+import { AuthComponent } from './auth/auth.component';
 
 const appRoute: Routes = [
     { path: '', component: HomeComponent },
@@ -42,6 +43,7 @@ const recipesAppRoute = [
     { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipesResolverService] }
   ] },
   { path: 'shopping-list', component: ShoppingListComponent },
+  { path: 'auth', component: AuthComponent },
   { path: 'page-not-found', component: PageNotFoundComponent, data: {message: 'Please double check the URL entered'} },
   { path: '**', redirectTo: '/page-not-found' }
 ];
@@ -57,7 +59,7 @@ const observables = [
     imports: [
         // RouterModule.forRoot(appRoute, { useHash: true })
         // RouterModule.forRoot(appRoute)
-        // RouterModule.forRoot(recipesAppRoute)
+        RouterModule.forRoot(recipesAppRoute)
         // RouterModule.forRoot(observables)
     ],
     exports: [
