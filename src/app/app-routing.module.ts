@@ -57,7 +57,7 @@ const observables = [
     imports: [
         // RouterModule.forRoot(appRoute, { useHash: true })
         // RouterModule.forRoot(appRoute)
-        RouterModule.forRoot(recipesAppRoute)
+        // RouterModule.forRoot(recipesAppRoute)
         // RouterModule.forRoot(observables)
     ],
     exports: [

@@ -53,6 +53,7 @@ import { HttpComponent } from './http/http.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './http/auth-interceptor.service';
 import { LoggingInterceptorService } from './http/logging-interceptor.service';
+import { TestingComponent } from './testing/testing.component';
 
 import { HeaderComponent } from './header/header.component';
 import { RecipesComponent } from './recipes/recipes.component';
@@ -68,7 +69,6 @@ import { RecipesResolverService } from './recipes/recipes-resolver.service';
 import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { DataStorageService } from './shared/data-storage.service';
-import { TestingComponent } from './testing/testing.component';
 
 @NgModule({
   declarations: [
