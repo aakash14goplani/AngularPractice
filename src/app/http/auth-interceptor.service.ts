@@ -9,7 +9,7 @@ export class AuthInterceptorService implements HttpInterceptor {
   constructor() { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('intercepting request...');
+    // console.log('intercepting request...');
     const modifiedRequest = req.clone({
       headers: req.headers.append('Access-Control-Allow-Origin', '*').append('Auth', 'aakash')
     });
@@ -23,8 +23,8 @@ export class AuthInterceptorService implements HttpInterceptor {
         }
       }
     )); */
-    return next.handle(modifiedRequest);
-    // return next.handle(req);
+    // return next.handle(modifiedRequest);
+    return next.handle(req);
   }
 
 }

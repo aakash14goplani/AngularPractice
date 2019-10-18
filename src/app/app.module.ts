@@ -70,6 +70,8 @@ import { RecipeService } from './recipes/recipe.service';
 import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { DataStorageService } from './shared/data-storage.service';
 import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner/loading-spinner.component';
+import { UserAuthInterceptorService } from './auth/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -115,6 +117,7 @@ import { AuthComponent } from './auth/auth.component';
     FilterPipe,
     HighlighterPipe,
     HttpComponent,
+    TestingComponent,
 
     HeaderComponent,
     RecipesComponent,
@@ -126,8 +129,8 @@ import { AuthComponent } from './auth/auth.component';
     DropdownDirective,
     RecipesStartComponent,
     RecipeEditComponent,
-    TestingComponent,
-    AuthComponent
+    AuthComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -138,7 +141,7 @@ import { AuthComponent } from './auth/auth.component';
   ],
   providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,
     RecipeService, ShoppingListService, DataStorageService, RecipesResolverService,
-    {
+    /* {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
       multi: true
@@ -146,6 +149,11 @@ import { AuthComponent } from './auth/auth.component';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoggingInterceptorService,
+      multi: true
+    }, */
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: UserAuthInterceptorService,
       multi: true
     }
   ],
