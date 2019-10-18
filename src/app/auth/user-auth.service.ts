@@ -22,6 +22,7 @@ export class UserAuthService {
     private API_KEY = 'AIzaSyAa4gxUdjzz2q1LTy7rK4eSFQqw6KP7ajA';
     // user = new Subject<User>();
     user = new BehaviorSubject<User>(null);
+    timeOut: any;
 
     public signup(email: string, password: string): Observable<AuthResponsePayload> {
         return this.http
@@ -55,6 +56,11 @@ export class UserAuthService {
 
     public logout(): void {
         this.user.next(null);
+        localStorage.removeItem('userData');
+        if (this.timeOut) {
+            clearTimeout(this.timeOut);
+        }
+        this.timeOut = null;
         this.router.navigate(['/auth']);
     }
 
@@ -82,5 +88,32 @@ export class UserAuthService {
         const expiryDate = new Date(new Date().getTime() + expiresIn * 1000);
         const user = new User(email, userId, token, expiryDate);
         this.user.next(user);
+        this.autoLogout(expiresIn * 1000);
+        localStorage.setItem('userData', JSON.stringify(user));
+    }
+
+    public autoLogin(): void {
+        const userData: {
+            email: string,
+            id: string,
+            token: string,
+            tokenExpirationDate: string
+        } = JSON.parse(localStorage.getItem('userData'));
+        if (!userData) {
+            return;
+        }
+
+        const continueUserSession = new User(userData.email, userData.id, userData.token, new Date(userData.tokenExpirationDate));
+        if (continueUserSession._token) {
+            this.user.next(continueUserSession);
+            const sessionExpiryData = new Date(userData.tokenExpirationDate).getTime() - new Date().getTime();
+            this.autoLogout(sessionExpiryData);
+        }
+    }
+
+    public autoLogout(expirationDuration: number): void {
+        this.timeOut = setTimeout(() => {
+            this.logout();
+        }, expirationDuration);
     }
 }
