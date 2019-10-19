@@ -1,25 +1,32 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserAuthService, AuthResponsePayload } from './user-auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertSharedComponent } from '../shared/alert-shared/alert-shared.component';
+import { PlaceholderDirective } from '../shared/placeholder.directive';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
 
-  constructor(private authService: UserAuthService, private router: Router) { }
+  constructor(
+    private authService: UserAuthService,
+    private router: Router,
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) { }
 
   isLoginMode: boolean = false;
   isLoading: boolean = false;
   errorMessage: string = '';
   authObservable: Observable<AuthResponsePayload>;
+  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+  alertSubscription: Subscription;
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onSwithcMode(): void {
     this.isLoginMode = !this.isLoginMode;
@@ -44,18 +51,43 @@ export class AuthComponent implements OnInit {
     this.authObservable.subscribe(
       responseData => {
         // console.log('response: ', responseData);
-        this.isLoading = false;
         this.errorMessage = '';
+        this.showAlertError('');
+        this.isLoading = false;
         this.router.navigate(['/recipes']);
       },
       errorMsg => {
         // console.log('error: ', errorMsg);
         this.isLoading = false;
         this.errorMessage = errorMsg;
+        this.showAlertError(errorMsg);
       }
     );
 
     authForm.reset();
+  }
+
+  closePopUp(): void {
+    this.errorMessage = '';
+  }
+
+  private showAlertError(errorMessage: string): void {
+    const alertComponentFactory = this.componentFactoryResolver.resolveComponentFactory(AlertSharedComponent);
+    const hostViewContainerRef = this.alertHost.viewContainerRef;
+    hostViewContainerRef.clear();
+
+    const componentRef = hostViewContainerRef.createComponent(alertComponentFactory);
+    componentRef.instance.message = errorMessage;
+    this.alertSubscription = componentRef.instance.closePopUp.subscribe(() => {
+      this.alertSubscription.unsubscribe();
+      hostViewContainerRef.clear();
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.alertSubscription) {
+      this.alertSubscription.unsubscribe();
+    }
   }
 
 }

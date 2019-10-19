@@ -1,9 +1,17 @@
+<ng-template appPlaceholder></ng-template>
 <div class="row" *ngIf="errorMessage.length > 0">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
+        <!-- traditional approach to display error message i.e. property-binding
         <div class="alert alert-danger center-align">
             <p>An error occured:</p>
             <span>{{ errorMessage }}</span>
-        </div>
+        </div> -->
+        <!-- Approach 2: display component conditionally using *ngIf, till now we only used this at propert level,
+            we can also use it at component level -> RECOMMENDED APPROACH
+        <app-alert-shared [message]="errorMessage" *ngIf="errorMessage.length > 0" (closePopUp)="closePopUp()"></app-alert-shared> -->
+        <!-- Approach 3: creating component on fly: AVOID until necessary 
+        <ng-template appPlaceholder></ng-template> => Adding ng-template here won't work, it has to be at top of 
+        HTML file i.e. line # 1-->
     </div>
 </div>
 <ng-template #loadinSpinner>

@@ -72,6 +72,8 @@ import { DataStorageService } from './shared/data-storage.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner/loading-spinner.component';
 import { UserAuthInterceptorService } from './auth/auth-interceptor.service';
+import { AlertSharedComponent } from './shared/alert-shared/alert-shared.component';
+import { PlaceholderDirective } from './shared/placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -130,7 +132,9 @@ import { UserAuthInterceptorService } from './auth/auth-interceptor.service';
     RecipesStartComponent,
     RecipeEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertSharedComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
@@ -157,6 +161,7 @@ import { UserAuthInterceptorService } from './auth/auth-interceptor.service';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AlertSharedComponent]
 })
 export class AppModule { }
