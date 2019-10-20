@@ -28,6 +28,10 @@ export class RecipeEditComponent implements OnInit {
     );
   }
 
+  get ingredientsControlFn() {
+    return (this.recipeForm.get('ingredients') as FormArray).controls;
+  }
+
   initForm(): void {
     let recipeName = '';
     let recipeImagePath = '';

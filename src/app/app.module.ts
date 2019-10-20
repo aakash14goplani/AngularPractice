@@ -1,8 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
 import { ServerComponent } from './server/server.component';
 import { NestedServersComponent } from './nested-servers/nested-servers.component';
 import { WarningAlertComponent } from './warning-alert/warning-alert.component';
@@ -31,8 +34,6 @@ import { RoutingServersComponent } from './routing/servers/servers.component';
 import { RoutingServerComponent } from './routing/servers/server/server.component';
 import { EditRoutingServerComponent } from './routing/servers/edit-server/edit-server.component';
 import { HomeComponent } from './routing/home/home.component';
-import { PageNotFoundComponent } from './routing/page-not-found/page-not-found.component';
-import { AppRoutingModule } from './app-routing.module';
 import { AuthGuard } from './routing/routing-services/auth-guard.service';
 import { AuthService } from './routing/routing-services/auth.service';
 import { CanDeactivateGuard } from './routing/servers/edit-server/can-deactivate-guard.service';
@@ -50,34 +51,18 @@ import { CamelCase } from './pipes/camelcase.pipe';
 import { FilterPipe } from './pipes/filter.pipe';
 import { HighlighterPipe } from './pipes/highlighter.pipe';
 import { HttpComponent } from './http/http.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TestingComponent } from './testing/testing.component';
 import { AuthInterceptorService } from './http/auth-interceptor.service';
 import { LoggingInterceptorService } from './http/logging-interceptor.service';
-import { TestingComponent } from './testing/testing.component';
 
 import { HeaderComponent } from './header/header.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.component';
-import { RecipeListComponent } from './recipes/recipe-list/recipe-list.component';
-import { RecipeItemComponent } from './recipes/recipe-list/recipe-item/recipe-item.component';
-import { ShoppingListComponent } from './shopping-list/shopping-list.component';
-import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-edit.component';
-import { DropdownDirective } from './shared/dropdown.directive';
-import { RecipesStartComponent } from './recipes/recipes-start/recipes-start.component';
-import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
-import { RecipesResolverService } from './recipes/recipes-resolver.service';
-import { RecipeService } from './recipes/recipe.service';
-import { ShoppingListService } from './shopping-list/shopping-list.service';
-import { DataStorageService } from './shared/data-storage.service';
-import { AuthComponent } from './auth/auth.component';
-import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner/loading-spinner.component';
-import { UserAuthInterceptorService } from './auth/auth-interceptor.service';
-import { AlertSharedComponent } from './shared/alert-shared/alert-shared.component';
-import { PlaceholderDirective } from './shared/placeholder.directive';
+import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core.module';
 
 @NgModule({
   declarations: [
     AppComponent,
+
     ServerComponent,
     NestedServersComponent,
     WarningAlertComponent,
@@ -106,7 +91,6 @@ import { PlaceholderDirective } from './shared/placeholder.directive';
     RoutingServerComponent,
     EditRoutingServerComponent,
     HomeComponent,
-    PageNotFoundComponent,
     ObservablesComponent,
     UserObservableComponent,
     HomeObservableComponent,
@@ -121,30 +105,19 @@ import { PlaceholderDirective } from './shared/placeholder.directive';
     HttpComponent,
     TestingComponent,
 
-    HeaderComponent,
-    RecipesComponent,
-    RecipeDetailComponent,
-    RecipeListComponent,
-    RecipeItemComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
-    DropdownDirective,
-    RecipesStartComponent,
-    RecipeEditComponent,
-    AuthComponent,
-    LoadingSpinnerComponent,
-    AlertSharedComponent,
-    PlaceholderDirective
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     AppRoutingModule,
-    HttpClientModule
+    SharedModule,
+    CoreModule
   ],
-  providers: [AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,
-    RecipeService, ShoppingListService, DataStorageService, RecipesResolverService,
+  providers: [
+    AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,
     /* {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
@@ -155,13 +128,7 @@ import { PlaceholderDirective } from './shared/placeholder.directive';
       useClass: LoggingInterceptorService,
       multi: true
     }, */
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: UserAuthInterceptorService,
-      multi: true
-    }
   ],
-  bootstrap: [AppComponent],
-  entryComponents: [AlertSharedComponent]
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

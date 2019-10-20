@@ -14,8 +14,10 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" id="email" [formControlName]="'email'" class="form-control">
+                        <!-- comment becuase failing ng build --prod: Property 'controls' does not exist on type 'AbstractControl'
                         <span class="help-block-pending" *ngIf="signupForm.controls.userData.controls.email.pending">Checking Email Validity...</span>
                         <span *ngIf="!signupForm.get('userData.email').valid && signupForm.get('userData.email').touched && !signupForm.controls.userData.controls.email.pending" class="help-block">Please enter valid email</span>
+                        -->
                     </div>
                 </div>
                 <!-- <div class="form-group">

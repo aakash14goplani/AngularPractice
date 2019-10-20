@@ -4,6 +4,7 @@ import { Observable, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 export interface AuthResponsePayload {
     idToken: string;
@@ -19,7 +20,7 @@ export class UserAuthService {
 
     constructor(private http: HttpClient, private router: Router) {}
 
-    private API_KEY = 'AIzaSyAa4gxUdjzz2q1LTy7rK4eSFQqw6KP7ajA';
+    private API_KEY = environment.API_KEY;
     // user = new Subject<User>();
     user = new BehaviorSubject<User>(null);
     timeOut: any;

@@ -10,8 +10,8 @@ import { Subscription } from 'rxjs';
 })
 
 export class HeaderComponent implements OnInit, OnDestroy {
-    /* collapsed: boolean = true;
-    @Output() displayContents = new EventEmitter<string>();
+    collapsed: boolean = true;
+    /* @Output() displayContents = new EventEmitter<string>();
 
     displayContentFor(contentType: string) {
         this.displayContents.emit(contentType);

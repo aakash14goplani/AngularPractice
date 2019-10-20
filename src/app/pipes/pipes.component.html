@@ -41,7 +41,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let server of servers | highlighter: 'name': 1">
+                    <tr *ngFor="let server of servers | highlighter: 'name': true">
                         <td>{{ server.name | camelcase: true }}</td>
                         <td>{{ server.instanceType }}</td>
                         <td>{{ server.started | date: 'dd MMMM, yyyy' }}</td>

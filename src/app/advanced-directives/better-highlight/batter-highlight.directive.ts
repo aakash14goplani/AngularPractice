@@ -32,7 +32,7 @@ export class BatterHighlightDirective implements OnInit {
     this.textAlign = this.defaultTextAlign;
   }
 
-  @HostListener('mouseenter') mouseover(event: Event) {
+  @HostListener('mouseenter') mouseover() {
     // console.log('enter: ', event);
     // this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', 'black');
     // this.renderer.setStyle(this.elementRef.nativeElement, 'color', 'white');
@@ -46,7 +46,7 @@ export class BatterHighlightDirective implements OnInit {
     this.color = this.onHoverColor;
     this.textAlign = this.onHoverTextAlign;
   }
-  @HostListener('mouseleave') mouseleave(event: Event) {
+  @HostListener('mouseleave') mouseleave() {
     // console.log('leave: ', event);
     // this.renderer.setStyle(this.elementRef.nativeElement, 'background-color', 'inherit');
     // this.renderer.setStyle(this.elementRef.nativeElement, 'color', 'inherit');
