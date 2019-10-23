@@ -58,6 +58,8 @@ import { LoggingInterceptorService } from './http/logging-interceptor.service';
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
+import { CustomElementsComponent } from './custom-elements/custom-elements.component';
+import { CustomAlertElementComponent } from './custom-elements/custom-alert-element';
 
 @NgModule({
   declarations: [
@@ -104,8 +106,10 @@ import { CoreModule } from './core.module';
     HighlighterPipe,
     HttpComponent,
     TestingComponent,
+    CustomElementsComponent,
+    CustomAlertElementComponent,
 
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -129,6 +133,7 @@ import { CoreModule } from './core.module';
       multi: true
     }, */
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CustomAlertElementComponent]
 })
 export class AppModule {}
