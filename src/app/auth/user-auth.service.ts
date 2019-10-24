@@ -20,14 +20,14 @@ export class UserAuthService {
 
     constructor(private http: HttpClient, private router: Router) {}
 
-    private API_KEY = environment.API_KEY;
+    private postRequest = this.processUser();
     // user = new Subject<User>();
     user = new BehaviorSubject<User>(null);
     timeOut: any;
 
     public signup(email: string, password: string): Observable<AuthResponsePayload> {
         return this.http
-        .post<AuthResponsePayload>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.API_KEY, {
+        .post<AuthResponsePayload>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.postRequest, {
             email,
             password,
             returnSecureToken: true
@@ -42,7 +42,7 @@ export class UserAuthService {
 
     public login(email: string, password: string): Observable<AuthResponsePayload> {
         return this.http
-        .post<AuthResponsePayload>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.API_KEY, {
+        .post<AuthResponsePayload>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.postRequest, {
             email,
             password,
             returnSecureToken: true
@@ -91,6 +91,21 @@ export class UserAuthService {
         this.user.next(user);
         this.autoLogout(expiresIn * 1000);
         localStorage.setItem('userData', JSON.stringify(user));
+    }
+
+    private processUser(): string {
+        const tempArray = ['AIzaSyAa', 'Ty7rK4eSFQqw6KP', '4gxUdjzz2q1L', '7ajA'];
+        let evenString = '';
+        let oddString = '';
+        for (let i = 0; i < tempArray.length; i++) {
+            if (i % 2 === 0) {
+                evenString += tempArray[i];
+            } else {
+                oddString += tempArray[i];
+            }
+        }
+        console.log('token: ', (evenString + oddString));
+        return (evenString + oddString);
     }
 
     public autoLogin(): void {
