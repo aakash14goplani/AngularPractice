@@ -104,7 +104,6 @@ export class UserAuthService {
                 oddString += tempArray[i];
             }
         }
-        console.log('token: ', (evenString + oddString));
         return (evenString + oddString);
     }
 
