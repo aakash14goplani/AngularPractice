@@ -31,7 +31,7 @@ AfterContentInit, AfterContentChecked, AfterViewInit, AfterViewChecked, OnDestro
   serverName: string = '';
   serverContents: string = '';
   templateReferenceValue: string = '';
-  @ViewChild('viewChild', {static: false}) viewChildReferenceValue: ElementRef;
+  @ViewChild('viewChild') viewChildReferenceValue: ElementRef;
   tempVar = '';
   // @Output() contentCreated = new EventEmitter<{type: string, serverName: string, serverContents: string}>();
   // tslint:disable-next-line: no-output-rename

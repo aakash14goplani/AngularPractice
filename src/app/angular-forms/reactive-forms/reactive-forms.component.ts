@@ -12,7 +12,7 @@ export class ReactiveFormsComponent implements AfterViewChecked, OnInit {
   genders: string[] = ['male', 'female', 'others'];
   nationalityArray = ['indian', 'american', 'african'];
   signupForm: FormGroup;
-  @ViewChild('form', {static: false}) formData: NgForm;
+  @ViewChild('form') formData: NgForm;
   forbiddenUserNames: string[] = ['Aakash', 'Goplani'];
 
   constructor() {  }

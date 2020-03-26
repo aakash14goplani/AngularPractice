@@ -23,7 +23,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   errorMessage: string = '';
   authObservable: Observable<AuthResponsePayload>;
-  @ViewChild(PlaceholderDirective, { static: false }) alertHost: PlaceholderDirective;
+  @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
   alertSubscription: Subscription;
 
   ngOnInit() { }

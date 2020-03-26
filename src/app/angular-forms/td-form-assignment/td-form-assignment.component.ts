@@ -10,7 +10,7 @@ export class TdFormAssignmentComponent implements OnInit {
 
   subscription: string[] = ['Basic', 'Advance', 'PRO'];
   defaultSubscription: string = 'Basic';
-  @ViewChild('form', {static: false}) formData: NgForm;
+  @ViewChild('form') formData: NgForm;
   formSubmitted: boolean = false;
   assignment = {
     email: '',

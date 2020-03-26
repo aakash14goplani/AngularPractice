@@ -8,7 +8,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AngularFormsComponent implements OnInit {
 
-  @ViewChild('form', {static: false}) formData: NgForm;
+  @ViewChild('form') formData: NgForm;
   defaultQuestion: string = 'pet';
   answer: string = '';
   games: string[] = ['indoor', 'outdoor', 'not interested'];
