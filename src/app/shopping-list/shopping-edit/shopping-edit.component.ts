@@ -4,6 +4,9 @@ import { Ingredients } from 'src/app/shared/ingredients.model';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as ShoppingListActions from '../store/shopping-list.actions';
+import * as fromShoppingList from '../store/shopping-list.reducer';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -18,7 +21,10 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editedItem: Ingredients;
   @ViewChild('form', {static: true}) editForm: NgForm;
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private store: Store<fromShoppingList.AppState>
+  ) { }
 
   // @Output() ingredient = new EventEmitter<Ingredients>();
 
@@ -42,9 +48,11 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const amount = formData.value.amount;
     if (name !== undefined && amount !== undefined) {
       if (this.editMode) {
-        this.shoppingListService.updateIngredient(this.editedIndexNumber, new Ingredients(name, Number(amount)));
+        this.store.dispatch(new ShoppingListActions.UpdateIngredients({ index: this.editedIndexNumber, ingredient: new Ingredients(name, Number(amount)) }));
+        // this.shoppingListService.updateIngredient(this.editedIndexNumber, new Ingredients(name, Number(amount)));
       } else {
-        this.shoppingListService.addIngredient(new Ingredients(name, Number(amount)));
+        this.store.dispatch(new ShoppingListActions.AddIngredient(new Ingredients(name, Number(amount))));
+        // this.shoppingListService.addIngredient(new Ingredients(name, Number(amount)));
       }
     }
     this.editMode = false;
@@ -57,7 +65,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    this.shoppingListService.deleteIngredient(this.editedIndexNumber);
+    this.store.dispatch(new ShoppingListActions.DeleteIngredients(this.editedIndexNumber));
+    // this.shoppingListService.deleteIngredient(this.editedIndexNumber);
     this.resetFormData();
   }
 

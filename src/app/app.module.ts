@@ -5,6 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
 
 import { ServerComponent } from './server/server.component';
 import { NestedServersComponent } from './nested-servers/nested-servers.component';
@@ -60,6 +61,7 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { CustomElementsComponent } from './custom-elements/custom-elements.component';
 import { CustomAlertElementComponent } from './custom-elements/custom-alert-element';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
 
 @NgModule({
   declarations: [
@@ -118,7 +120,8 @@ import { CustomAlertElementComponent } from './custom-elements/custom-alert-elem
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    StoreModule.forRoot({shoppingList: shoppingListReducer})
   ],
   providers: [
     AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,

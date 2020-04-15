@@ -46,10 +46,4 @@ testem.log
 Thumbs.db
 
 # JSON configurations
-firebase.json
-package-lock.json
-package.json
-tsconfig.app.json
-tsconfig.json
-tsconfig.spec.json
-tslint.json
+
