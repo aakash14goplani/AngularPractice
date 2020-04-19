@@ -7,10 +7,6 @@ export interface State {
     editedIngredientIndex: number;
 }
 
-export interface AppState {
-    shoppingList: State
-}
-
 const initialState: State = {
     ingredients: [
         new Ingredients('paneer', 4),
@@ -56,9 +52,24 @@ export function shoppingListReducer(state: State = initialState, action: Shoppin
         case ShoppingListActions.DELETE_INGREDIENTS:
             return {
                 ...state,
+                // filter return new array with filtered items
                 ingredients: state.ingredients.filter((currentIngredient, currentIngredientIndex) => {
                     return currentIngredientIndex !== action.payload;
                   })
+            };
+
+        case ShoppingListActions.START_EDIT:
+            return {
+                ...state,
+                editedIngredientIndex: action.payload,
+                editedIngredient: { ...state.ingredients[action.payload] }
+            };
+
+        case ShoppingListActions.STOP_EDIT:
+            return {
+                ...state,
+                editedIngredient: null,
+                editedIngredientIndex: -1
             };
 
         default: return initialState;

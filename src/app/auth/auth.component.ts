@@ -5,6 +5,9 @@ import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertSharedComponent } from '../shared/alert-shared/alert-shared.component';
 import { PlaceholderDirective } from '../shared/placeholder.directive';
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from './store/auth.action';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-auth',
@@ -16,7 +19,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   constructor(
     private authService: UserAuthService,
     private router: Router,
-    private componentFactoryResolver: ComponentFactoryResolver
+    private componentFactoryResolver: ComponentFactoryResolver,
+    private store: Store<fromApp.AppState>
   ) { }
 
   isLoginMode: boolean = false;
@@ -26,7 +30,17 @@ export class AuthComponent implements OnInit, OnDestroy {
   @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
   alertSubscription: Subscription;
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.store.select('auth').subscribe(
+      authData => {
+        this.isLoading = authData.loading;
+        this.errorMessage = (authData.authError) ? authData.authError : '';
+        if (this.errorMessage) {
+          this.showAlertError(this.errorMessage);
+        }
+      }
+    );
+  }
 
   onSwithcMode(): void {
     this.isLoginMode = !this.isLoginMode;
@@ -42,13 +56,16 @@ export class AuthComponent implements OnInit, OnDestroy {
     this.isLoading = true;
     if (this.isLoginMode) {
       // login
-      this.authObservable = this.authService.login(email, password);
+      // this.authObservable = this.authService.login(email, password);
+      this.store.dispatch(
+        new AuthActions.LoginStart({email, password})
+      );
     } else {
       // signup
       this.authObservable = this.authService.signup(email, password);
     }
 
-    this.authObservable.subscribe(
+    /* this.authObservable.subscribe(
       responseData => {
         // console.log('response: ', responseData);
         this.errorMessage = '';
@@ -62,7 +79,7 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.errorMessage = errorMsg;
         this.showAlertError(errorMsg);
       }
-    );
+    ); */
 
     authForm.reset();
   }

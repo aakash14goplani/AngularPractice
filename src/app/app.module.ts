@@ -6,6 +6,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { ServerComponent } from './server/server.component';
 import { NestedServersComponent } from './nested-servers/nested-servers.component';
@@ -61,7 +62,11 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { CustomElementsComponent } from './custom-elements/custom-elements.component';
 import { CustomAlertElementComponent } from './custom-elements/custom-alert-element';
+
 import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import { authReducer } from './auth/store/auth.reducer';
+import * as fromAuth from './store/app.reducer';
+import { AuthEffects } from './auth/store/auth.effects';
 
 @NgModule({
   declarations: [
@@ -121,7 +126,12 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
     AppRoutingModule,
     SharedModule,
     CoreModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer})
+    /* StoreModule.forRoot({
+      shoppingList: shoppingListReducer,
+      auth: authReducer
+    }), */
+    StoreModule.forRoot(fromAuth.appReducer),
+    EffectsModule.forRoot([AuthEffects])
   ],
   providers: [
     AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,
