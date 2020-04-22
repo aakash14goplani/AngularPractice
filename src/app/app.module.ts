@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { ServerComponent } from './server/server.component';
 import { NestedServersComponent } from './nested-servers/nested-servers.component';
@@ -67,6 +69,7 @@ import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer
 import { authReducer } from './auth/store/auth.reducer';
 import * as fromAuth from './store/app.reducer';
 import { AuthEffects } from './auth/store/auth.effects';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -131,7 +134,9 @@ import { AuthEffects } from './auth/store/auth.effects';
       auth: authReducer
     }), */
     StoreModule.forRoot(fromAuth.appReducer),
-    EffectsModule.forRoot([AuthEffects])
+    EffectsModule.forRoot([AuthEffects]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,

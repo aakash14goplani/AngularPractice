@@ -1,6 +1,7 @@
 import { Component, OnInit, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UserAuthService, AuthResponsePayload } from './user-auth.service';
+import { UserAuthService } from './user-auth.service';
+// import {  AuthResponsePayload } from './user-auth.service';
 import { Observable, Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertSharedComponent } from '../shared/alert-shared/alert-shared.component';
@@ -23,15 +24,16 @@ export class AuthComponent implements OnInit, OnDestroy {
     private store: Store<fromApp.AppState>
   ) { }
 
-  isLoginMode: boolean = false;
+  isLoginMode: boolean = true;
   isLoading: boolean = false;
   errorMessage: string = '';
-  authObservable: Observable<AuthResponsePayload>;
+  // authObservable: Observable<AuthResponsePayload>;
   @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
   alertSubscription: Subscription;
+  storeSubscription: Subscription;
 
   ngOnInit() { 
-    this.store.select('auth').subscribe(
+    this.storeSubscription = this.store.select('auth').subscribe(
       authData => {
         this.isLoading = authData.loading;
         this.errorMessage = (authData.authError) ? authData.authError : '';
@@ -53,7 +55,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     const email = authForm.value.email;
     const password = authForm.value.password;
 
-    this.isLoading = true;
+    // this.isLoading = true;
     if (this.isLoginMode) {
       // login
       // this.authObservable = this.authService.login(email, password);
@@ -62,7 +64,10 @@ export class AuthComponent implements OnInit, OnDestroy {
       );
     } else {
       // signup
-      this.authObservable = this.authService.signup(email, password);
+      // this.authObservable = this.authService.signup(email, password);
+      this.store.dispatch(
+        new AuthActions.SignupStart({email, password})
+      );
     }
 
     /* this.authObservable.subscribe(
@@ -85,7 +90,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   }
 
   closePopUp(): void {
-    this.errorMessage = '';
+    this.store.dispatch(new AuthActions.ClearError());
+    // this.errorMessage = '';
   }
 
   private showAlertError(errorMessage: string): void {
@@ -96,6 +102,7 @@ export class AuthComponent implements OnInit, OnDestroy {
     const componentRef = hostViewContainerRef.createComponent(alertComponentFactory);
     componentRef.instance.message = errorMessage;
     this.alertSubscription = componentRef.instance.closePopUp.subscribe(() => {
+      this.closePopUp();
       this.alertSubscription.unsubscribe();
       hostViewContainerRef.clear();
     });
@@ -104,6 +111,9 @@ export class AuthComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.alertSubscription) {
       this.alertSubscription.unsubscribe();
+    }
+    if (this.storeSubscription) {
+      this.storeSubscription.unsubscribe();
     }
   }
 

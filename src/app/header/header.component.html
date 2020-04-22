@@ -10,9 +10,15 @@
             <ul class="nav navbar-nav">
                 <!-- <li><a href="#" (click)="displayContentFor('recipe')">Recipes</a></li>
                 <li><a href="#" (click)="displayContentFor('shopping')">Shopping List</a></li> -->
-                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a [routerLink]="['/recipes']" *ngIf="isAuthenticated">Recipes</a></li>
-                <li routerLinkActive="active"><a routerLink="/auth" *ngIf="!isAuthenticated">Authenticate</a></li>
-                <li routerLinkActive="active"><a [routerLink]="'/shopping-list'">Shopping List</a></li>
+                <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a [routerLink]="['/recipes']" *ngIf="isAuthenticated">Recipes</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a routerLink="/auth" *ngIf="!isAuthenticated">Authenticate</a>
+                </li>
+                <li routerLinkActive="active">
+                    <a [routerLink]="'/shopping-list'">Shopping List</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="logout">

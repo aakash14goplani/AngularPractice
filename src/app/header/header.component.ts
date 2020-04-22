@@ -4,6 +4,8 @@ import { UserAuthService } from '../auth/user-auth.service';
 import { Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
+import * as AuthActions from '../auth/store/auth.action';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-header',
@@ -30,11 +32,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // this.userSubscription = this.authService.user.subscribe(user => {
-        this.userSubscription = this.store.select('auth').subscribe(user => {
-            this.isAuthenticated = !!user.user;
+        this.userSubscription = this.store.select('auth')
+        .pipe(map(authState => authState.user))
+        .subscribe(user => {
+            this.isAuthenticated = !!user;
             /* console.log('user: ', user);
             console.log('!user: ', !user);
-            console.log('!!user: ', !!user); */
+            console.log('isAuthenticated: ', !!user); */
         });
     }
 
@@ -47,7 +51,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
 
     logout(): void {
-        this.authService.logout();
+        // this.authService.logout();
+        this.store.dispatch(new AuthActions.Logout());
     }
 
     ngOnDestroy(): void {

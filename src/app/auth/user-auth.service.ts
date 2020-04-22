@@ -9,14 +9,14 @@ import { Store } from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.action';
 
-export interface AuthResponsePayload {
+/* export interface AuthResponsePayload {
     idToken: string;
     email: string;
     refreshToken: string;
     expiresIn: string;
     localId: string;
     registered?: boolean;
-}
+} */
 
 @Injectable({ providedIn: 'root' })
 export class UserAuthService {
@@ -25,12 +25,13 @@ export class UserAuthService {
         private http: HttpClient,
         private router: Router,
         private store: Store<fromApp.AppState>
-    ) {}
+    ) { }
+    
+    timeOut: any;
 
-    private postRequest = this.processUser();
+    /* private postRequest = this.processUser();
     // user = new Subject<User>();
     // user = new BehaviorSubject<User>(null);
-    timeOut: any;
 
     public signup(email: string, password: string): Observable<AuthResponsePayload> {
         return this.http
@@ -70,7 +71,7 @@ export class UserAuthService {
             clearTimeout(this.timeOut);
         }
         this.timeOut = null;
-        this.router.navigate(['/auth']);
+        // this.router.navigate(['/auth']);
     }
 
     private handleError(errorResponse: HttpErrorResponse): Observable<never> {
@@ -152,5 +153,18 @@ export class UserAuthService {
         this.timeOut = setTimeout(() => {
             this.logout();
         }, expirationDuration);
+    } */
+
+    setLogoutTimer(expirationDuration: number) {
+        this.timeOut = setTimeout(() => {
+            this.store.dispatch(new AuthActions.Logout());
+        }, expirationDuration);
+    }
+
+    clearLogoutTimer() {
+        if (this.timeOut) {
+            clearTimeout(this.timeOut);
+            this.timeOut = null;
+        }
     }
 }
