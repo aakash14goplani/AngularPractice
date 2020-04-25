@@ -5,25 +5,33 @@ import { catchError, tap } from 'rxjs/operators';
 import { User } from './user.model';
 import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../store/app.reducer';
+import * as AuthActions from './store/auth.action';
 
-export interface AuthResponsePayload {
+/* export interface AuthResponsePayload {
     idToken: string;
     email: string;
     refreshToken: string;
     expiresIn: string;
     localId: string;
     registered?: boolean;
-}
+} */
 
 @Injectable({ providedIn: 'root' })
 export class UserAuthService {
 
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(
+        private http: HttpClient,
+        private router: Router,
+        private store: Store<fromApp.AppState>
+    ) { }
 
-    private postRequest = this.processUser();
-    // user = new Subject<User>();
-    user = new BehaviorSubject<User>(null);
     timeOut: any;
+
+    /* private postRequest = this.processUser();
+    // user = new Subject<User>();
+    // user = new BehaviorSubject<User>(null);
 
     public signup(email: string, password: string): Observable<AuthResponsePayload> {
         return this.http
@@ -56,13 +64,14 @@ export class UserAuthService {
     }
 
     public logout(): void {
-        this.user.next(null);
+        // this.user.next(null);
+        this.store.dispatch(new AuthActions.Logout());
         localStorage.removeItem('userData');
         if (this.timeOut) {
             clearTimeout(this.timeOut);
         }
         this.timeOut = null;
-        this.router.navigate(['/auth']);
+        // this.router.navigate(['/auth']);
     }
 
     private handleError(errorResponse: HttpErrorResponse): Observable<never> {
@@ -88,7 +97,15 @@ export class UserAuthService {
     private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
         const expiryDate = new Date(new Date().getTime() + expiresIn * 1000);
         const user = new User(email, userId, token, expiryDate);
-        this.user.next(user);
+        // this.user.next(user);
+        this.store.dispatch(
+            new AuthActions.Login({
+                email: email,
+                id: userId,
+                token: token,
+                tokenExpirationDate: expiryDate
+            })
+        );
         this.autoLogout(expiresIn * 1000);
         localStorage.setItem('userData', JSON.stringify(user));
     }
@@ -120,7 +137,13 @@ export class UserAuthService {
 
         const continueUserSession = new User(userData.email, userData.id, userData.token, new Date(userData.tokenExpirationDate));
         if (continueUserSession._token) {
-            this.user.next(continueUserSession);
+            // this.user.next(continueUserSession);
+            this.store.dispatch(new AuthActions.Login({
+                email: userData.email,
+                id: userData.id,
+                token: userData.token,
+                tokenExpirationDate: new Date(userData.tokenExpirationDate)
+            }));
             const sessionExpiryData = new Date(userData.tokenExpirationDate).getTime() - new Date().getTime();
             this.autoLogout(sessionExpiryData);
         }
@@ -130,5 +153,18 @@ export class UserAuthService {
         this.timeOut = setTimeout(() => {
             this.logout();
         }, expirationDuration);
+    } */
+
+    setLogoutTimer(expirationDuration: number) {
+        this.timeOut = setTimeout(() => {
+            this.store.dispatch(new AuthActions.Logout());
+        }, expirationDuration);
+    }
+
+    clearLogoutTimer() {
+        if (this.timeOut) {
+            clearTimeout(this.timeOut);
+            this.timeOut = null;
+        }
     }
 }

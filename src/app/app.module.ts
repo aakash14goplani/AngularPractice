@@ -5,6 +5,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 import { ServerComponent } from './server/server.component';
 import { NestedServersComponent } from './nested-servers/nested-servers.component';
@@ -60,6 +64,13 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core.module';
 import { CustomElementsComponent } from './custom-elements/custom-elements.component';
 import { CustomAlertElementComponent } from './custom-elements/custom-alert-element';
+
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducer';
+import { authReducer } from './auth/store/auth.reducer';
+import * as fromAuth from './store/app.reducer';
+import { AuthEffects } from './auth/store/auth.effects';
+import { environment } from 'src/environments/environment';
+import { RecipeEffects } from './recipes/store/recipe.effects';
 
 @NgModule({
   declarations: [
@@ -118,7 +129,15 @@ import { CustomAlertElementComponent } from './custom-elements/custom-alert-elem
     HttpClientModule,
     AppRoutingModule,
     SharedModule,
-    CoreModule
+    CoreModule,
+    /* StoreModule.forRoot({
+      shoppingList: shoppingListReducer,
+      auth: authReducer
+    }), */
+    StoreModule.forRoot(fromAuth.appReducer),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects]),
+    StoreDevtoolsModule.instrument({ logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot()
   ],
   providers: [
     AuthGuard, AuthService, CanDeactivateGuard, ServerResolver, ServersRoutingService,

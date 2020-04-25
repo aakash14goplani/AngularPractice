@@ -4,6 +4,9 @@ import { Ingredients } from 'src/app/shared/ingredients.model';
 import { ShoppingListService } from '../shopping-list.service';
 import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import * as ShoppingListActions from '../store/shopping-list.actions';
+import * as fromApp from '../../store/app.reducer';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -16,14 +19,32 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   editMode: boolean = false;
   editedIndexNumber: number;
   editedItem: Ingredients;
-  @ViewChild('form', {static: true}) editForm: NgForm;
+  @ViewChild('form', { static: true }) editForm: NgForm;
 
-  constructor(private shoppingListService: ShoppingListService) { }
+  constructor(
+    private shoppingListService: ShoppingListService,
+    private store: Store<fromApp.AppState>
+  ) { }
 
   // @Output() ingredient = new EventEmitter<Ingredients>();
 
   ngOnInit() {
-    this.subscription = this.shoppingListService.ingredientEdit.subscribe(
+    this.subscription = this.store
+      .select('shoppingList')
+      .subscribe(stateData => {
+        if (stateData.editedIngredientIndex > -1) {
+          this.editMode = true;
+          this.editedItem = stateData.editedIngredient;
+          this.editForm.setValue({
+            name: this.editedItem.name,
+            amount: this.editedItem.amount
+          });
+        } else {
+          this.editMode = false;
+        }
+      });
+
+    /* this.subscription = this.shoppingListService.ingredientEdit.subscribe(
       (index: number) => {
         this.editedIndexNumber = index;
         this.editMode = true;
@@ -33,7 +54,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
           amount: this.editedItem.amount
         });
       }
-    );
+    ); */
   }
 
   addIngredients(formData: NgForm): void {
@@ -42,9 +63,13 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
     const amount = formData.value.amount;
     if (name !== undefined && amount !== undefined) {
       if (this.editMode) {
-        this.shoppingListService.updateIngredient(this.editedIndexNumber, new Ingredients(name, Number(amount)));
+        this.store.dispatch(
+          new ShoppingListActions.UpdateIngredient(new Ingredients(name, Number(amount)))
+        );
+        // this.shoppingListService.updateIngredient(this.editedIndexNumber, new Ingredients(name, Number(amount)));
       } else {
-        this.shoppingListService.addIngredient(new Ingredients(name, Number(amount)));
+        this.store.dispatch(new ShoppingListActions.AddIngredient(new Ingredients(name, Number(amount))));
+        // this.shoppingListService.addIngredient(new Ingredients(name, Number(amount)));
       }
     }
     this.editMode = false;
@@ -54,15 +79,18 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   resetFormData(): void {
     this.editForm.reset();
     this.editMode = false;
+    this.store.dispatch(new ShoppingListActions.StopEdit());
   }
 
   onDelete(): void {
-    this.shoppingListService.deleteIngredient(this.editedIndexNumber);
+    this.store.dispatch(new ShoppingListActions.DeleteIngredient());
+    // this.shoppingListService.deleteIngredient(this.editedIndexNumber);
     this.resetFormData();
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.store.dispatch(new ShoppingListActions.StopEdit());
   }
 
   /* comment this approach to add template driven forms
