@@ -26,7 +26,7 @@ export class UserAuthService {
         private router: Router,
         private store: Store<fromApp.AppState>
     ) { }
-    
+
     timeOut: any;
 
     /* private postRequest = this.processUser();

@@ -18,44 +18,46 @@ const initialState: State = {
     editedIngredientIndex: -1
 };
 
-export function shoppingListReducer(state: State = initialState, action: ShoppingListActions.ShoppingListActions) {
+export function shoppingListReducer(
+    state: State = initialState,
+    action: ShoppingListActions.ShoppingListActions
+) {
     switch (action.type) {
-        case ShoppingListActions.ADD_INGREDIENT: 
+        case ShoppingListActions.ADD_INGREDIENT:
             return {
                 ...state,
                 ingredients: [...state.ingredients, action.payload]
             };
 
-        case ShoppingListActions.ADD_INGREDIENTS: 
+        case ShoppingListActions.ADD_INGREDIENTS:
             return {
                 ...state,
                 ingredients: [...state.ingredients, ...action.payload]
             };
 
-        case ShoppingListActions.UPDATE_INGREDIENTS:
-            // fetch current ingredient
-            const oldIngredient = state.ingredients[action.payload.index];
-            // immutable change - create new object, copy existing data, add new data from payload so the updatedData consist data to be updated
+        case ShoppingListActions.UPDATE_INGREDIENT:
+            const ingredient = state.ingredients[state.editedIngredientIndex];
             const updatedIngredient = {
-                ...oldIngredient,
-                ...action.payload.ingredient
+                ...ingredient,
+                ...action.payload
             };
-            // we need array in template, fetch existing ingredients
             const updatedIngredients = [...state.ingredients];
-            // update array with new ingredient
-            updatedIngredients[action.payload.index] = updatedIngredient;
+            updatedIngredients[state.editedIngredientIndex] = updatedIngredient;
             return {
                 ...state,
-                ingredients: updatedIngredients
+                ingredients: updatedIngredients,
+                editedIngredientIndex: -1,
+                editedIngredient: null
             };
 
-        case ShoppingListActions.DELETE_INGREDIENTS:
+        case ShoppingListActions.DELETE_INGREDIENT:
             return {
                 ...state,
-                // filter return new array with filtered items
-                ingredients: state.ingredients.filter((currentIngredient, currentIngredientIndex) => {
-                    return currentIngredientIndex !== action.payload;
-                  })
+                ingredients: state.ingredients.filter((ig, igIndex) => {
+                    return igIndex !== state.editedIngredientIndex;
+                }),
+                editedIngredientIndex: -1,
+                editedIngredient: null
             };
 
         case ShoppingListActions.START_EDIT:
@@ -71,7 +73,8 @@ export function shoppingListReducer(state: State = initialState, action: Shoppin
                 editedIngredient: null,
                 editedIngredientIndex: -1
             };
-
-        default: return initialState;
+    
+        default:
+            return state;
     }
 }
