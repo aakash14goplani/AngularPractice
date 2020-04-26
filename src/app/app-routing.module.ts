@@ -55,7 +55,7 @@ const recipesAppRoute: Routes = [
 
 @NgModule({
     imports: [
-      RouterModule.forRoot(recipesAppRoute, { preloadingStrategy: PreloadAllModules })
+      RouterModule.forRoot(recipesAppRoute, { preloadingStrategy: PreloadAllModules, initialNavigation: 'enabled' })
       /* RouterModule.forRoot(appRoute, { useHash: true })
         RouterModule.forRoot(appRoute)
         RouterModule.forRoot(observables) */
